@@ -16,6 +16,13 @@ Company AI OS is a Python-based local AI platform that integrates AI employees, 
 - ✅ DAY6 Settings Manager
 - ✅ DAY7 SQLite Integration
 - ⏳ DAY8 Database Manager
+- ⬜ DAY9 AI Employee Manager
+- ⬜ DAY10 Memory System
+
+##
+- ✅ 完了
+- ⏳ 現在開発中・次回予定
+- ⬜ 今後予定
 
 ## Project Links
 
