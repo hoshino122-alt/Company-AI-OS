@@ -19,8 +19,9 @@ Company AI OS is a Python-based local AI platform that integrates AI employees, 
 - ✅ DAY9 AI Employee Manager
 - ✅ DAY10 Memory Manager
 - ✅ DAY11 Ollama Integration
-- ⏳ DAY12 Memory-enabled AI Employee
-
+- ✅ DAY12 Memory-enabled AI Employee
+- ⏳ DAY13 Company AI Chat
+  
 ### Status
 
 - ✅ Completed
