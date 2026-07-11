@@ -1,4 +1,3 @@
-
 # Company AI OS
 
 🚀 Building a Local AI Operating System in 100 Days
@@ -6,8 +5,6 @@
 ## About
 
 Company AI OS is a Python-based local AI platform that integrates AI employees, memory, databases, and automation.
-
-## Development Progress
 
 ## Development Progress
 
@@ -21,24 +18,27 @@ Company AI OS is a Python-based local AI platform that integrates AI employees, 
 - ✅ DAY8 Database Manager
 - ✅ DAY9 AI Employee Manager
 - ✅ DAY10 Memory Manager
-- ⏳ Ollama Integration
+- ✅ DAY11 Ollama Integration
+- ⏳ DAY12 Memory-enabled AI Employee
 
-##
-- ✅ 完了
-- ⏳ 現在開発中・次回予定
-- ⬜ 今後予定
+### Status
+
+- ✅ Completed
+- ⏳ In Progress / Next
+- ⬜ Planned
 
 ## Project Links
 
-- 📺 YouTube: 開発動画
-- 📝 note: 開発日誌・設計解説
-- 💻 GitHub: ソースコード
+- 📺 YouTube: Development Videos
+- 📝 note: Development Journal & Design
+- 💻 GitHub: Source Code
 
 ## Tech Stack
 
 - Python
 - Ollama
 - SQLite
+- Qdrant
 - RAG
 - Local LLM
-
+- Git
