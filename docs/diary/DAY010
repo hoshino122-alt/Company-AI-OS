@@ -1,0 +1,34 @@
+# DAY10 - Memory Manager
+
+## Overview
+
+Implemented a Memory Manager for Company AI OS.
+
+## Goal
+
+Create a common memory management system that allows each AI employee to store and retrieve personal memories.
+
+## What I implemented
+
+- Created `common/memory.py`
+- Added the `MemoryManager` class
+- Implemented memory saving
+- Implemented memory loading
+- Added personal memory support for each AI employee
+- Connected with the Database Manager
+- Verified memory operations
+
+## Result
+
+Each AI employee can now manage its own personal memory through a common interface.
+
+This provides the foundation for persistent conversations and long-term context.
+
+## Next Step
+
+Integrate Ollama and enable real-time conversations with AI employees.
+
+## Related
+
+- **YouTube:** DAY10 – Python Memory Manager
+- **note:** DAY10 – Creating a Memory Manager in Python
