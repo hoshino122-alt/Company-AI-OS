@@ -24,7 +24,8 @@ Company AI OS is a Python-based local AI platform that integrates AI employees, 
 - ✅ DAY14 AI Employee Switching
 - ✅ DAY15 AI Secretary
 - ✅ DAY16 Calendar Integration
-- ⏳ DAY17 ToDo Management
+- ✅ DAY17 ToDo Management
+- ⏳ DAY18 Reminder System
   
 ### Status
 
