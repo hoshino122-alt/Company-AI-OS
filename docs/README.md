@@ -35,6 +35,14 @@ Company AI OS is a Python-based local AI platform that integrates AI employees, 
 - ⏳ In Progress / Next
 - ⬜ Planned
 
+## Project Progress
+
+- ✅ Phase 1 : Foundation            Completed
+- 🔄 Phase 2 : AI Employee           In Progress
+- ⬜ Phase 3 : AI Departments         Planned
+- ⬜ Phase 4 : AI President           Planned
+- ⬜ Phase 5 : Company AI OS v1.0     Planned
+
 ## Project Links
 
 - 📺 YouTube: Development Videos
