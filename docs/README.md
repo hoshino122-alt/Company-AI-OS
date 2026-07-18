@@ -27,7 +27,16 @@ Company AI OS is a Python-based local AI platform that integrates AI employees, 
 - ✅ DAY17 ToDo Management
 - ✅ DAY18 Reminder System
 - ✅ DAY19 AI Secretary Dashboard
-- ⏳ DAY20 First Task Reception
+- ✅ DAY20 First Task Reception
+- ✅ DAY21 Writer01 Joins
+  
+### AI Employee Arc
+
+- ✅ DAY21 Writer01 Joins
+- ⏳ DAY22 First Article Delivery
+- ⏳ DAY23 GitHub Integration
+- ⏳ DAY24 Article Management
+- ⏳ DAY25 Writer01 Version 1.0
     
 ### Status
 
