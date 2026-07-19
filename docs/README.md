@@ -34,8 +34,8 @@ Company AI OS is a Python-based local AI platform that integrates AI employees, 
   
 ### AI Employee Arc
 
-⏳ DAY24 Document Registration
-⬜ DAY25 Semantic Search
+- ⏳ DAY24 Document Registration
+- ⬜ DAY25 Semantic Search
     
 ### Status
 
