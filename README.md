@@ -40,7 +40,7 @@ Company AI OS is a Python-based local AI platform that integrates AI employees, 
 - ✅ DAY30 First Delivery
 - ✅ DAY31 Delivery History Management
 
-##AI Employee Arc
+AI Employee Arc
 
 - ⬜ DAY32 Feedback Management
 - ⬜ DAY33 Performance Evaluation
