@@ -1,76 +1,107 @@
 # Company AI OS
 
-🚀 Building a Local AI Operating System in 100 Days
+> Building an AI-powered operating system for managing a virtual company.
 
-## About
+Company AI OS is an experimental project that aims to build a company operated by AI agents.
 
-Company AI OS is a Python-based local AI platform that integrates AI employees, memory, databases, and automation.
+This repository documents the development process from DAY001 onward, gradually evolving from basic project architecture to a complete AI operating system.
 
-## Development Progress
+---
 
-- ✅ DAY1 Project Setup
-- ✅ DAY2 Directory Structure
-- ✅ DAY3 Configuration
-- ✅ DAY4 Logging Design
-- ✅ DAY5 Common Logger
-- ✅ DAY6 Settings Manager
-- ✅ DAY7 SQLite Integration
-- ✅ DAY8 Database Manager
-- ✅ DAY9 AI Employee Manager
-- ✅ DAY10 Memory Manager
-- ✅ DAY11 Ollama Integration
-- ✅ DAY12 Memory-enabled AI Employee
-- ✅ DAY13 Company AI Chat
-- ✅ DAY14 AI Employee Switching
-- ✅ DAY15 AI Secretary
-- ✅ DAY16 Calendar Integration
-- ✅ DAY17 ToDo Management
-- ✅ DAY18 Reminder System
-- ✅ DAY19 AI Secretary Dashboard
-- ✅ DAY20 First Task Reception
-- ✅ DAY21 Writer01 Joins
-- ✅ DAY22 First Article Delivery
-- ✅ DAY23 Knowledge Base
-- ✅ DAY24 Document Registration
-- ✅ DAY25 Semantic Search
-- ✅ DAY26 Knowledge Retrieval
-- ✅ DAY27 AI Employee Workflow
-- ✅ DAY28 Task Completion
-- ✅ DAY29 Quality Review
-- ✅ DAY30 First Delivery
-- ✅ DAY31 Delivery History Management
-- ✅ DAY32 Feedback & Evaluation Management
-- ✅ DAY33 AI Employee Growth Management
+## Project Vision
 
-- ⬜ DAY34
-- ⬜ DAY35
-  
-### Status
+The goal of Company AI OS is to create an environment where AI agents can collaborate as employees inside a virtual company.
 
-- ✅ Completed
-- ⏳ In Progress / Next
-- ⬜ Planned
+Future components include:
 
-## Project Progress
+- 🤖 AI CEO
+- 👨‍💼 AI Employees
+- 📅 AI Secretary
+- 🏢 Department Management
+- ✅ Task Management
+- 🗄 SQLite Database
+- 🧠 Local LLM Integration
+- 📚 Vector Database (RAG)
+- ⚙ Workflow Automation
 
-- ✅ Phase 1 : Foundation            Completed
-- 🔄 Phase 2 : AI Employee           In Progress
-- ⬜ Phase 3 : AI Departments         Planned
-- ⬜ Phase 4 : AI President           Planned
-- ⬜ Phase 5 : Company AI OS v1.0     Planned
+---
 
-## Project Links
+## Current Project Structure
 
-- 📺 YouTube: Development Videos
-- 📝 note: Development Journal & Design
-- 💻 GitHub: Source Code
+```
+company_ai_os/
+│
+├── database/
+├── managers/
+├── models/
+├── data/
+└── demo/
+```
 
-## Tech Stack
+Each directory has a dedicated responsibility.
 
-- Python
-- Ollama
+| Directory | Description |
+|------------|-------------|
+| database | Database connection and repositories |
+| managers | Business logic |
+| models | Data models |
+| data | JSON configuration and sample data |
+| demo | Demonstration programs |
+
+---
+
+## Development Log
+
+This project is developed as a daily development journal.
+
+- DAY001 – DAY033
+  - Company AI OS prototype
+  - Ren'Py interface
+  - Basic AI framework
+
+- DAY034
+  - Project architecture refactoring
+  - Python project structure
+  - Foundation for future expansion
+
+---
+
+## Roadmap
+
+Upcoming features:
+
+- Employee Management
+- Department Management
+- Company Manager
+- AI Task Assignment
+- SQLite Integration
+- Local LLM Support
+- Multi-Agent Collaboration
+
+---
+
+## Technologies
+
+- Python 3
+- Ren'Py
 - SQLite
-- Qdrant
-- RAG
-- Local LLM
-- Git
+- JSON
+- Local LLM (planned)
+- Ollama (planned)
+- Qdrant (planned)
+
+---
+
+## Development Philosophy
+
+Company AI OS is designed with scalability and modularity in mind.
+
+Every component has a single responsibility, making the project easier to maintain and extend as new AI capabilities are added.
+
+---
+
+## Author
+
+Company AI OS Development Log
+
+Building one step every day toward an AI-operated company.
