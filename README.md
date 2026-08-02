@@ -100,6 +100,15 @@ Every component has a single responsibility, making the project easier to mainta
 
 ---
 
+## Keywords
+
+- AI Core
+- Company AI OS
+- Python
+- Ren'Py
+- Artificial Intelligence
+- Local LLM
+
 ## Author
 
 Company AI OS Development Log
