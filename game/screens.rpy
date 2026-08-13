@@ -46,14 +46,6 @@ screen company_ai_os():
 
         at boot_fade2
 
-#    text "BOOT STEP: [boot_step]":
-
-#        xpos 760
-#        ypos 850
-
-#        size 22
-#        color "#66ffff"
-
     text "BOOT PROGRESS":
 
         xpos 760
@@ -170,7 +162,25 @@ screen left_panel():
             color "#66ffff" 
 
 
+init python:
+
+    def core_load_state():
+
+        if store.gpu_usage >= 75:
+            return "HIGH"
+
+        elif store.gpu_usage >= 60:
+            return "ACTIVE"
+
+        else:
+            return "STABLE"
+
+
 screen right_panel():
+
+    timer 1.0 repeat True action Function(task_sequence_update)
+
+    timer 5.0 repeat True action Function(core_monitor_update)
 
     frame:
 
@@ -185,43 +195,57 @@ screen right_panel():
 
         has vbox
 
-        spacing 15
+        spacing 4
 
 
-        text "COMMAND":
+        text "CORE MONITOR":
 
             size 28
 
             color "#00ffee"
 
 
-        text "STATUS ONLINE":
+        text "STATUS [core_status]":
 
             size 22
 
             color "#00ff99"
 
 
-        text "QUEUE":
+        text "POWER [core_power]%":
 
-            size 24
+            size 20
+
+            color "#00ffee"
+
+
+        text "CORE LOAD [core_load_state()]":
+
+            size 20
 
             color "#66ffff"
 
 
-        text "001 Boot":
+        fixed:
 
-            size 20
-
-
-        text "002 Memory":
-
-            size 20
+            xsize 240
+            ysize 18
 
 
-        text "003 Initialize":
+            frame:
 
-            size 20
+                background "#003344"
+
+                xsize 240
+                ysize 18
+
+
+            frame:
+
+                background "#00ffee"
+
+                xsize int(240 * gpu_usage / 100.0)
+                ysize 18
 
 
         text "GPU [gpu_usage]%":
@@ -231,14 +255,14 @@ screen right_panel():
             color "#00ffee"
 
 
-        text "VRAM [vram_usage] GB":
+        text "VRAM [vram_usage:.1f] GB":
 
             size 20
 
             color "#00ffee"
 
 
-        text "TOKENS [tokens_speed]":
+        text "TOKENS [tokens_speed]/s":
 
             size 20
 
@@ -250,6 +274,82 @@ screen right_panel():
             size 20
 
             color "#00ffee"
+
+
+        text "QUEUE":
+
+            size 22
+
+            color "#66ffff"
+
+
+        text "001 Boot [queue_boot]":
+
+            size 18
+
+
+        text "002 Memory [queue_memory]":
+
+            size 18
+
+
+        text "003 Initialize [queue_initialize]":
+
+            size 18
+
+        text "TASK QUEUE":
+
+            size 20
+
+            color "#66ffff"
+
+
+        for task in store.task_queue:
+
+            text "[task['id']:03d]  [task['name']]":
+
+                size 17
+
+                color "#00ffee"
+
+
+        text "004 AI Engine [queue_ai_engine]":
+
+            size 18
+
+        text "005 Task [queue_task]":
+
+            size 18
+
+        text "CURRENT TASK":
+
+            size 20
+
+            color "#66ffff"
+
+
+        text "ID [current_task_id]":
+
+            size 17
+
+        text "TASK [current_task]":
+
+            size 17
+
+            color "#00ffee"
+
+        text "STATUS [queue_task]":
+
+            size 17
+
+            color "#66ffff"
+
+        text "RESULT [task_result]":
+
+            size 17
+
+            color "#00ff99"
+
 
 transform ring_rotate:
 
@@ -340,19 +440,11 @@ screen bottom_log():
             color "#00ffee"
 
 
-        text "12:00:01  AI Core Boot":
+        for log in core_log_history:
 
-            size 20
+            text log:
 
-
-        text "12:00:03  Memory Ready":
-
-            size 20
-
-
-        text "12:00:05  Command Queue Ready":
-
-            size 20
+                size 20
 
 
 screen boot_overlay():
@@ -388,4 +480,4 @@ screen boot_overlay():
 
                 size 32
 
-                color "#66ffff"                        
+                color "#66ffff"     
