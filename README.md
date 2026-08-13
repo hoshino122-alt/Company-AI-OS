@@ -109,6 +109,10 @@ Every component has a single responsibility, making the project easier to mainta
 - Artificial Intelligence
 - Local LLM
 
+## Link
+
+[DAY38 Documentation](docs/DAY038.md)
+
 ## Author
 
 Company AI OS Development Log
