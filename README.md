@@ -111,7 +111,7 @@ Every component has a single responsibility, making the project easier to mainta
 
 ## Link
 
-[DAY38 Documentation](docs/DAY038.md)
+[DAY38 Documentation](docs/diary/DAY038.md)
 
 ## Author
 
