@@ -197,8 +197,8 @@ AI COREが過去の情報を利用して回答する基本機能を確認しま�
 
 ### Related
 
-* YouTube: DAY39
-* note: DAY39 開発記録
+* YouTube: DAY39　https://youtu.be/Lu9D7He9JyY
+* note: DAY39 開発記録　https://note.com/grand_peony7915/n/nb23b824aa6ce?app_launch=false
 
 
 ## Author
