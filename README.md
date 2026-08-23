@@ -113,6 +113,94 @@ Every component has a single responsibility, making the project easier to mainta
 
 [DAY38 Documentation](docs/diary/DAY038.md)
 
+## DAY39 — AI CORE Memory Awakens
+
+DAY39では、AI COREにMemory機能を組み込み、過去の情報を利用して回答できる仕組みをテストしました。
+
+### Implemented
+
+* Conversation Memory
+* Facts Memory
+* Tool Logs Memory
+* Memory Selector
+* Tool実行結果の保存
+* 過去のTool Logs検索
+* 過去の計算結果の再利用
+* AI CORE / TOOL / MEMORY / LLM のキャラクター化
+* Ren'Pyによる会話ドラマ表現
+
+### Memory Flow
+
+```text
+User Question
+      ↓
+Memory Selector
+      ↓
+Conversation Memory
+Facts Memory
+Tool Logs Memory
+      ↓
+Relevant Memory
+      ↓
+AI CORE
+      ↓
+LLM
+      ↓
+Answer
+```
+
+### Tool Result Memory
+
+Toolを実行した結果は、
+
+```text
+execute_tool()
+      ↓
+log_tool()
+      ↓
+save_tool_log()
+      ↓
+Tool Logs Memory
+```
+
+という流れで保存されます。
+
+DAY39では、過去の計算結果として
+
+```text
+1,550
+```
+
+をMemoryから取得し、
+
+> 一番最後の計算結果は1,550です。
+
+と回答できることを確認しました。
+
+### Ren'Py Drama
+
+DAY39ではMemory機能の動作を、AI CORE、TOOL、MEMORY、LLMのキャラクターによる会話として表現しました。
+
+**TOOL → AI CORE → MEMORY → LLM → Answer**
+
+という流れを視覚的に表現しています。
+
+### Status
+
+**DAY39 — Memory functionality tested successfully.**
+
+AI COREが過去の情報を利用して回答する基本機能を確認しました。
+
+**MEMORY AWAKENS**
+
+---
+
+### Related
+
+* YouTube: DAY39
+* note: DAY39 開発記録
+
+
 ## Author
 
 Company AI OS Development Log
