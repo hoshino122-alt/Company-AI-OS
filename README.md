@@ -320,7 +320,8 @@ DAY41へ続きます。
 
 * YouTube: DAY39　https://youtu.be/Lu9D7He9JyY
 * note: DAY39 開発記録　https://note.com/grand_peony7915/n/nb23b824aa6ce?app_launch=false
-
+* YouTube: DAY40　[https://youtu.be/Lu9D7He9JyY](https://youtu.be/Mp9IgqDbyjc)
+* note: DAY40 開発記録　[https://note.com/grand_peony7915/n/nb23b824aa6ce?app_launch=false](https://note.com/grand_peony7915/n/neb28a92e87e0?app_launch=false)
 
 ## Author
 
