@@ -195,6 +195,127 @@ AI COREが過去の情報を利用して回答する基本機能を確認しま�
 
 ---
 
+## DAY40 — AI COREは「記憶」を使って判断する
+
+DAY40では、DAY39で実装したMemory機能をさらに発展させ、AI COREがMemoryを参照しながら、Toolを実行するかどうかを判断する処理を実装・検証しました。
+
+### 実装内容
+
+* Memory SelectorによるMemory選択
+* Conversation Memoryの検索
+* Facts Memoryの取得
+* Tool Logs Memoryの検索
+* 過去の計算結果の判定
+* 新しいTool実行要求の判定
+* calculate Toolとの連携
+* Tool実行結果と過去のMemoryの分離
+* MemoryとTool結果をLLMへ統合
+* 過去結果を再計算せずMemoryから取得する処理
+
+### 動作確認
+
+#### 1. 新しい計算
+
+```text
+25 × 4
+↓
+calculate Tool
+↓
+100
+↓
+Tool Logs Memoryへ保存
+```
+
+#### 2. 過去の結果を質問
+
+```text
+前回の計算結果は？
+↓
+Tool Logs Memoryを検索
+↓
+100
+```
+
+過去の結果を質問した場合は、新しいToolを実行せず、Memoryに保存された結果を使用します。
+
+#### 3. 新しい計算
+
+```text
+1200 + 350
+↓
+calculate Tool
+↓
+1,550
+↓
+Tool Logs Memoryへ保存
+```
+
+#### 4. 過去の結果を使って新しい処理を要求
+
+```text
+前回の計算結果を使って、もう一度計算して
+```
+
+この場合は、過去のTool Logsを参照しながら、新しいTool実行要求として処理します。
+
+### DAY40で確認できたこと
+
+AI COREは単純にMemoryを検索するだけではなく、
+
+```text
+質問
+ ↓
+Memory Selector
+ ↓
+必要なMemoryを選択
+ ↓
+過去の結果を参照
+ ↓
+新しいToolが必要か判断
+ ↓
+必要ならTool実行
+ ↓
+Tool結果 + Memory
+ ↓
+LLM
+ ↓
+回答
+```
+
+という流れで処理できるようになりました。
+
+### DAY39からの進化
+
+DAY39：
+
+**Memoryが過去の記録を保持する**
+
+DAY40：
+
+**AI COREがMemoryを使って判断する**
+
+MemoryとToolを分離しながら、それぞれをAI COREの判断処理に組み込む段階へ進みました。
+
+### Status
+
+* Conversation Memory：実装・検証
+* Facts Memory：実装・検証
+* Tool Logs Memory：実装・検証
+* Memory Selector：実装・検証
+* Tool Selector：実装・検証
+* calculate Tool：実装・検証
+* Memory + Tool + LLM連携：検証完了
+
+### Related
+
+* YouTube：DAY40｜AI COREは「記憶」を使って判断する
+* note：DAY40｜AI COREは「記憶」を使って判断する
+
+DAY41へ続きます。
+
+
+
+
 ### Related
 
 * YouTube: DAY39　https://youtu.be/Lu9D7He9JyY
