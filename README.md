@@ -753,7 +753,7 @@ AIと一緒に少しずつ作り上げていく、個人開発のAI OSプロジ�
 * note: DAY40 開発記録　[https://note.com/grand_peony7915/n/nb23b824aa6ce?app_launch=false](https://note.com/grand_peony7915/n/neb28a92e87e0?app_launch=false)
 * YouTube: DAY41　[https://youtu.be/Lu9D7He9JyY](https://youtu.be/1-P7r5PmWuE)
 * note: DAY41 開発記録　[https://note.com/grand_peony7915/n/nb23b824aa6ce?app_launch=false](https://note.com/grand_peony7915/n/nd032d232e525?app_launch=false)
-* YouTube: DAY42　[[https://youtu.be/Lu9D7He9JyY](https://youtu.be/DyuD8CwEU5I)](https://youtu.be/Gtg-5Y42LiI)
+* YouTube: DAY42　[[https://youtu.be/Lu9D7He9JyY](https://youtu.be/DyuD8CwEU5I)](https://youtu.be/Gtg-5Y42LiI)](https://youtu.be/Gtg-5Y42LiI)
 * note: DAY42 開発記録　https://note.com/grand_peony7915/n/nb23b824aa6ce?app_launch=false  
 
 ## Author
