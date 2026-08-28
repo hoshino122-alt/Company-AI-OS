@@ -1053,16 +1053,13 @@ Memoryに残された過去の失敗を分析すると、
 
 ### Related
 
-* YouTube: DAY39　https://youtu.be/Lu9D7He9JyY
-* note: DAY39 開発記録　https://note.com/grand_peony7915/n/nb23b824aa6ce?app_launch=false
-* YouTube: DAY40　[https://youtu.be/Lu9D7He9JyY](https://youtu.be/Mp9IgqDbyjc)
-* note: DAY40 開発記録　[https://note.com/grand_peony7915/n/nb23b824aa6ce?app_launch=false](https://note.com/grand_peony7915/n/neb28a92e87e0?app_launch=false)
-* YouTube: DAY41　[https://youtu.be/Lu9D7He9JyY](https://youtu.be/1-P7r5PmWuE)
-* note: DAY41 開発記録　[https://note.com/grand_peony7915/n/nb23b824aa6ce?app_launch=false](https://note.com/grand_peony7915/n/nd032d232e525?app_launch=false)
-* YouTube: DAY42　[[https://youtu.be/Lu9D7He9JyY](https://youtu.be/DyuD8CwEU5I)](https://youtu.be/Gtg-5Y42LiI)](https://youtu.be/Gtg-5Y42LiI)
-* note: DAY42 開発記録　https://note.com/grand_peony7915/n/nb23b824aa6ce?app_launch=false
-* YouTube: DAY43　[https://youtu.be/Lu9D7He9JyY](https://youtu.be/Pvc5nJRV9R4)
-* note: DAY43 開発記録　[https://note.com/grand_peony7915/n/nb23b824aa6ce?app_launch=false](https://note.com/grand_peony7915/n/n9bea2eab14b1?app_launch=false)
+## 公開記録
+
+- DAY39　[YouTube](https://youtu.be/Lu9D7He9JyY)｜[note](https://note.com/grand_peony7915/n/nb23b824aa6ce)
+- DAY40　[YouTube](https://youtu.be/Mp9IgqDbyjc)｜[note](https://note.com/grand_peony7915/n/neb28a92e87e0)
+- DAY41　[YouTube](https://youtu.be/1-P7r5PmWuE)｜[note](https://note.com/grand_peony7915/n/nd032d232e525)
+- DAY42　[YouTube](https://youtu.be/Gtg-5Y42LiI)｜[note](https://note.com/grand_peony7915/n/n7c0df093d47c)
+- DAY43　[YouTube](https://youtu.be/Pvc5nJRV9R4)｜[note](https://note.com/grand_peony7915/n/n9bea2eab14b1)
 
 ## Author
 
