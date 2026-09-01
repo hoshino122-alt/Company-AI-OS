@@ -1318,7 +1318,9 @@ AI CORE
 - DAY41　[YouTube](https://youtu.be/1-P7r5PmWuE)｜[note](https://note.com/grand_peony7915/n/nd032d232e525)
 - DAY42　[YouTube](https://youtu.be/Gtg-5Y42LiI)｜[note](https://note.com/grand_peony7915/n/n7c0df093d47c)
 - DAY43　[YouTube](https://youtu.be/Pvc5nJRV9R4)｜[note](https://note.com/grand_peony7915/n/n9bea2eab14b1)
-
+- DAY44　[YouTube](https://youtu.be/dPlCDRh9gkE)｜[note](https://note.com/grand_peony7915/n/n7c0df093d47c)
+- DAY45　[YouTube](https://youtu.be/5LllDoLPdPc)｜[note](https://note.com/grand_peony7915/n/n9256d16b172d)
+- DAY46　[YouTube](https://youtu.be/WdKbBHEFc_Q)｜[note](https://note.com/grand_peony7915/n/ndc2554cba7fe)
 ## Author
 
 Company AI OS Development Log
