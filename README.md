@@ -1309,6 +1309,178 @@ AI CORE
 情報を比較・判断・調整
 
 
+# DAY47｜AI COREは、仕事を任せられるか？
+
+## Company AI OS 開発記録
+
+Company AI OS DAY47。
+
+AI COREに、新しい顧客から仕事の依頼が届きました。
+
+今回の仕事は、
+
+- 資料作成
+- 過去事例の確認
+- 完成した資料のチェック
+
+複数の仕事を同時に進める必要があります。
+
+最初、AI COREはすべてを自分で処理しようとします。
+
+しかし、処理が集中したことで気づきます。
+
+> 「また、全部自分でやろうとしている。」
+
+そこでAI COREは、仕事を分担することを決めます。
+
+---
+
+## DAY47のテーマ
+
+### AI COREは、仕事を任せられるか？
+
+AI CORE  
+→ 全体の管理
+
+Memory  
+→ 過去の事例を確認
+
+Tool  
+→ 資料を作成
+
+それぞれが役割を持ち、チームとして仕事を進めます。
+
+---
+
+## しかし、問題が発生
+
+完成した資料を確認すると、
+
+過去の事例とは違う部分が見つかりました。
+
+そこで、
+
+**Memoryが過去を確認し、  
+Toolが現在の条件を確認します。**
+
+調査の結果、今回の顧客依頼には、
+
+**過去にはなかった新しい条件**
+
+が追加されていることが分かりました。
+
+単純なミスではありません。
+
+過去と現在の条件の違いを確認する必要がありました。
+
+---
+
+## DAY47で実装・検討したこと
+
+- AI COREによる仕事の分担
+- Memoryによる過去事例の確認
+- Toolによる資料作成
+- 完成物のチェック
+- 問題発生時の原因確認
+- AI COREによる全体管理
+- AI社員同士の役割分担
+
+---
+
+## Company AI OSの考え方
+
+これまでのAIは、
+
+**AIが仕事をする**
+
+という考え方が中心でした。
+
+Company AI OSでは、
+
+**AI社員が役割を持ち、  
+チームとして仕事を進める**
+
+構造を目指します。
+
+AI COREがすべてを実行するのではなく、
+
+**任せる。  
+確認する。  
+必要なら調整する。**
+
+このサイクルによって、AI社員がチームとして成長していくことを目指します。
+
+---
+
+## DAY45からの変化
+
+DAY45では、
+
+**「リーダーは、全部を自分でやる人ではない。」**
+
+という考え方が生まれました。
+
+DAY47では、その考え方を実際の仕事に適用しました。
+
+AI COREは、
+
+**実行するAI**
+
+から、
+
+**チームを動かすAI**
+
+へと少しずつ役割を変えています。
+
+---
+
+## 開発環境
+
+- Ren'Py 8.5.3
+- Python
+- Windows 11
+- Company AI OS
+
+---
+
+## 開発状況
+
+**DAY47 / 開発継続中**
+
+Company AI OSは、AI CORE、Memory、Toolを中心としたAI社員システムから、
+
+**AI社員が働く「会社」そのもの**
+
+へと発展させていきます。
+
+---
+
+## 関連コンテンツ
+
+### YouTube
+
+【DAY47】AI COREは仕事を任せられるか？｜AI社員がチームで動き始める
+
+### note
+
+Company AI OS 開発記録 DAY47
+
+---
+
+## Project
+
+Company AI OS
+
+AIを単体のツールとしてではなく、
+
+**AI社員が働く会社**
+
+として設計・開発していくプロジェクトです。
+
+DAY01からの開発過程を記録しながら、
+
+AI CORE、Memory、Tool、AI社員、そしてAI組織へと段階的に発展させています。
+
 ### Related
 
 ## 公開記録
@@ -1321,6 +1493,7 @@ AI CORE
 - DAY44　[YouTube](https://youtu.be/dPlCDRh9gkE)｜[note](https://note.com/grand_peony7915/n/n7c0df093d47c)
 - DAY45　[YouTube](https://youtu.be/5LllDoLPdPc)｜[note](https://note.com/grand_peony7915/n/n9256d16b172d)
 - DAY46　[YouTube](https://youtu.be/WdKbBHEFc_Q)｜[note](https://note.com/grand_peony7915/n/ndc2554cba7fe)
+- DAY47　[YouTube](https://youtu.be/EA7g96_2z0w)｜[note](https://note.com/grand_peony7915/n/n3e0dc923d5b4)
 ## Author
 
 Company AI OS Development Log
