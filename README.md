@@ -1481,6 +1481,27 @@ DAY01からの開発過程を記録しながら、
 
 AI CORE、Memory、Tool、AI社員、そしてAI組織へと段階的に発展させています。
 
+## DAY48
+
+### AIに任せるのではない。AIと一緒に判断する。
+
+## DAY48
+
+### AIに任せるのではない。AIと一緒に判断する。
+
+DAY48では、Company AI OSにおける
+人間とAIの役割分担について整理しました。
+
+- AI Core：全体を整理・調整
+- LLM：分析・推論
+- Memory：過去の情報を保持・提供
+- Tool：実際の処理
+- Human：最終的な判断
+
+AIにすべてを任せるのではなく、
+それぞれが役割を持つことで、
+人間とAIが一つのシステムとして動くことを目指します。
+
 ### Related
 
 ## 公開記録
@@ -1494,6 +1515,9 @@ AI CORE、Memory、Tool、AI社員、そしてAI組織へと段階的に発展�
 - DAY45　[YouTube](https://youtu.be/5LllDoLPdPc)｜[note](https://note.com/grand_peony7915/n/n9256d16b172d)
 - DAY46　[YouTube](https://youtu.be/WdKbBHEFc_Q)｜[note](https://note.com/grand_peony7915/n/ndc2554cba7fe)
 - DAY47　[YouTube](https://youtu.be/EA7g96_2z0w)｜[note](https://note.com/grand_peony7915/n/n3e0dc923d5b4)
+- DAY48　[YouTube](https://youtu.be/K2Zg3H068Uw)｜[note](https://note.com/grand_peony7915/n/naf086f254565)
+
+
 ## Author
 
 Company AI OS Development Log
