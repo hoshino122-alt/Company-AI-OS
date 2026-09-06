@@ -1502,6 +1502,14 @@ AIにすべてを任せるのではなく、
 それぞれが役割を持つことで、
 人間とAIが一つのシステムとして動くことを目指します。
 
+DAY49 Ren'Pyシナリオを追加。
+AI Coreが問題を整理し、Memory・LLM・Toolを順番に活用して
+人間が最終判断できる状態を作る流れをシナリオ化。
+
+Scene_01～Scene_08の8枚構成に対応。
+DAY48の背景・UI・演出形式を継承。
+音声ファイル用のコードを追加。
+
 ### Related
 
 ## 公開記録
@@ -1516,7 +1524,7 @@ AIにすべてを任せるのではなく、
 - DAY46　[YouTube](https://youtu.be/WdKbBHEFc_Q)｜[note](https://note.com/grand_peony7915/n/ndc2554cba7fe)
 - DAY47　[YouTube](https://youtu.be/EA7g96_2z0w)｜[note](https://note.com/grand_peony7915/n/n3e0dc923d5b4)
 - DAY48　[YouTube](https://youtu.be/K2Zg3H068Uw)｜[note](https://note.com/grand_peony7915/n/naf086f254565)
-
+- DAY49　[YouTube](https://youtu.be/IqAPd3BX6iY)｜[note](https://note.com/grand_peony7915/n/n905e46176c65)
 
 ## Author
 
