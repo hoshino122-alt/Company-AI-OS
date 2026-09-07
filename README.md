@@ -1549,7 +1549,7 @@ voice/day50/
 - DAY47　[YouTube](https://youtu.be/EA7g96_2z0w)｜[note](https://note.com/grand_peony7915/n/n3e0dc923d5b4)
 - DAY48　[YouTube](https://youtu.be/K2Zg3H068Uw)｜[note](https://note.com/grand_peony7915/n/naf086f254565)
 - DAY49　[YouTube](https://youtu.be/IqAPd3BX6iY)｜[note](https://note.com/grand_peony7915/n/n905e46176c65)
-
+- DAY50　[YouTube](https://youtu.be/n7fjLon-M88)｜[note](https://note.com/grand_peony7915/n/na02dadff1fe2)
 ## Author
 
 Company AI OS Development Log
