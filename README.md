@@ -1534,6 +1534,20 @@ Scene_07
 Scene_08
 voice/day50/
 
+DAY51では、Ren'Pyで「AI CORE STATUS」画面が
+表示されない問題を題材に、AIと一緒に原因を探して
+修正するミニドラマを制作。
+
+AI Coreが問題を整理し、
+LLMがコードを分析し、
+Memoryが過去の実装を確認し、
+Toolが修正を実行する。
+
+目的を達成するまでの
+「問題発生 → 分析 → 修正 → 再実行 → 完了」
+という開発プロセスを表現しています。
+
+
 ### Related
 
 ## 公開記録
@@ -1550,6 +1564,9 @@ voice/day50/
 - DAY48　[YouTube](https://youtu.be/K2Zg3H068Uw)｜[note](https://note.com/grand_peony7915/n/naf086f254565)
 - DAY49　[YouTube](https://youtu.be/IqAPd3BX6iY)｜[note](https://note.com/grand_peony7915/n/n905e46176c65)
 - DAY50　[YouTube](https://youtu.be/n7fjLon-M88)｜[note](https://note.com/grand_peony7915/n/na02dadff1fe2)
+- DAY51　[YouTube](https://youtu.be/bRQyDGMG0_8)｜[note](https://note.com/grand_peony7915/n/n216e082ac1be)
+
+
 ## Author
 
 Company AI OS Development Log
