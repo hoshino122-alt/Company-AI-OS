@@ -1547,6 +1547,568 @@ Toolが修正を実行する。
 「問題発生 → 分析 → 修正 → 再実行 → 完了」
 という開発プロセスを表現しています。
 
+## DAY52｜AI時代の幕開け
+
+Company AI OSにRAG（Retrieval-Augmented Generation）の導入を開始。
+
+これまでCompany AI OSでは、AI社員やAI Coreなど、
+AIそのものの仕組みを構築してきました。
+
+DAY52からは、AIが「会社の知識」を利用できる仕組みへ進みます。
+
+会社には、
+
+- プロジェクト資料
+- 技術資料
+- 開発記録
+- 会議記録
+- 業務データ
+
+など、多くの情報があります。
+
+しかし、情報が存在するだけではAIはそれを適切に利用できません。
+
+そこでRAGを使い、
+
+会社の知識
+↓
+検索
+↓
+関連情報の取得
+↓
+LLM
+↓
+回答
+
+という流れをCompany AI OSに組み込んでいきます。
+
+DAY52は、単なる機能追加ではありません。
+
+「AIが会社に存在する」段階から、
+
+「AIが会社の知識を利用する」
+
+段階への移行です。
+
+### Production Change
+
+DAY52から制作方式も変更。
+
+従来：
+1シーン → 複数のキャラクター音声
+
+変更後：
+1シーン → 1枚の画像 + 1つのナレーション
+
+ナレーターが状況・会話・意味をまとめて説明する方式に変更し、
+音声生成、エンコード、ファイル管理、Ren'Pyへの組み込み作業を簡略化。
+
+制作負担を減らしながら、DAY100まで継続できる開発体制を優先します。
+
+game/day52.rpy
+
+label day52:
+
+    scene black
+    with fade
+
+    play music "audio/Future.mp3" fadein 1.5 volume 0.2
+
+    $ renpy.pause(1.0, hard=True)
+
+    show text "{size=52}COMPANY AI OS{/size}" at truecenter
+    with dissolve
+
+    $ renpy.pause(2.0, hard=True)
+
+    hide text
+    with dissolve
+
+    show text "{size=52}DAY52{/size}" at truecenter
+    with dissolve
+
+    $ renpy.pause(2.0, hard=True)
+
+    hide text
+    with dissolve
+
+
+    # ==========================================
+    # Scene 01
+    # 新しいオフィス
+    # ==========================================
+
+    show scene52_01
+    with fade
+
+    show screen character_dialogue(
+        "Hiro",
+        "……ずいぶん大きくなったな。"
+    )
+
+    play sound "voice/day52/day52_011.ogg" volume 1.5
+    $ renpy.pause(3.0, hard=True)
+
+    hide screen character_dialogue
+
+    show screen character_dialogue(
+        "AI Core",
+        "Company AI OSの開発環境を更新しました。"
+    )
+
+    play sound "voice/day52/day52_012.ogg" volume 1.5
+    $ renpy.pause(3.9, hard=True)
+
+    hide screen character_dialogue
+
+    show screen character_dialogue(
+        "Hiro",
+        "ここから、会社として動かしていく。"
+    )
+
+    play sound "voice/day52/day52_013.ogg" volume 1.5
+    $ renpy.pause(3.0, hard=True)
+
+    hide screen character_dialogue
+
+    hide scene52_01
+    with dissolve
+
+
+    # ==========================================
+    # Scene 02
+    # 会社の情報を探す
+    # ==========================================
+
+    show scene52_02
+    with dissolve
+
+    show screen character_dialogue(
+        "Hiro",
+        "AI Core、以前のプロジェクト資料を探してくれる？"
+    )
+
+    play sound "voice/day52/day52_021.ogg" volume 1.5
+    $ renpy.pause(4.0, hard=True)
+
+    hide screen character_dialogue
+
+    show screen character_dialogue(
+        "AI Core",
+        "検索対象を指定してください。"
+    )
+
+    play sound "voice/day52/day52_022.ogg" volume 1.5
+    $ renpy.pause(3.6, hard=True)
+
+    hide screen character_dialogue
+
+    show screen character_dialogue(
+        "Hiro",
+        "Company AI OSの開発資料だ。"
+    )
+
+    play sound "voice/day52/day52_023.ogg" volume 1.5
+    $ renpy.pause(3.0, hard=True)
+
+    hide screen character_dialogue
+
+    hide scene52_02
+    with dissolve
+
+
+    # ==========================================
+    # Scene 03
+    # 情報が見つからない
+    # ==========================================
+
+    show scene52_03
+    with dissolve
+
+    show screen character_dialogue(
+        "AI Core",
+        "現在のMemoryから、関連する情報を確認できません。"
+    )
+
+    play sound "voice/day52/day52_031.ogg" volume 1.5
+    $ renpy.pause(4.8, hard=True)
+
+    hide screen character_dialogue
+
+    show screen character_dialogue(
+        "Hiro",
+        "でも、資料はちゃんと保存してある。"
+    )
+
+    play sound "voice/day52/day52_032.ogg" volume 1.5
+    $ renpy.pause(3.5, hard=True)
+
+    hide screen character_dialogue
+
+    show screen character_dialogue(
+        "AI Core",
+        "Memoryに保存されている情報と、会社の資料は同じではありません。"
+    )
+
+    play sound "voice/day52/day52_033.ogg" volume 1.5
+    $ renpy.pause(5.0, hard=True)
+
+    hide screen character_dialogue
+
+    show screen character_dialogue(
+        "Hiro",
+        "……そうか。"
+    )
+
+    play sound "voice/day52/day52_034.ogg" volume 1.5
+    $ renpy.pause(2.5, hard=True)
+
+    hide screen character_dialogue
+
+    hide scene52_03
+    with dissolve
+
+
+    # ==========================================
+    # Scene 04
+    # RAGという考え方
+    # ==========================================
+
+    show scene52_04
+    with dissolve
+
+    show screen character_dialogue(
+        "Hiro",
+        "じゃあ、会社の資料をAIに全部覚えさせるのか？"
+    )
+
+    play sound "voice/day52/day52_041.ogg" volume 1.5
+    $ renpy.pause(4.0, hard=True)
+
+    hide screen character_dialogue
+
+    show screen character_dialogue(
+        "AI Core",
+        "すべてを記憶させる必要はありません。"
+    )
+
+    play sound "voice/day52/day52_042.ogg" volume 1.5
+    $ renpy.pause(3.8, hard=True)
+
+    hide screen character_dialogue
+
+    show screen character_dialogue(
+        "Hiro",
+        "じゃあ、どうする？"
+    )
+
+    play sound "voice/day52/day52_043.ogg" volume 1.5
+    $ renpy.pause(2.5, hard=True)
+
+    hide screen character_dialogue
+
+    show screen character_dialogue(
+        "AI Core",
+        "必要な情報を検索し、その情報をLLMに渡します。"
+    )
+
+    play sound "voice/day52/day52_044.ogg" volume 1.5
+    $ renpy.pause(4.5, hard=True)
+
+    hide screen character_dialogue
+
+    show screen character_dialogue(
+        "Hiro",
+        "それが……RAG？"
+    )
+
+    play sound "voice/day52/day52_045.ogg" volume 1.5
+    $ renpy.pause(2.5, hard=True)
+
+    hide screen character_dialogue
+
+    show screen character_dialogue(
+        "AI Core",
+        "はい。"
+    )
+
+    play sound "voice/day52/day52_046.ogg" volume 1.5
+    $ renpy.pause(2.8, hard=True)
+
+    hide screen character_dialogue
+
+    hide scene52_04
+    with dissolve
+
+
+    # ==========================================
+    # Scene 05
+    # 会社の知識をつなぐ
+    # ==========================================
+
+    show scene52_05
+    with dissolve
+
+    show screen character_dialogue(
+        "Hiro",
+        "これなら、会社の資料をAIが使えるようになる。"
+    )
+
+    play sound "voice/day52/day52_051.ogg" volume 1.5
+    $ renpy.pause(3.5, hard=True)
+
+    hide screen character_dialogue
+
+    show screen character_dialogue(
+        "AI Core",
+        "はい。"
+    )
+
+    play sound "voice/day52/day52_052.ogg" volume 1.5
+    $ renpy.pause(3.5, hard=True)
+
+    hide screen character_dialogue
+
+    show screen character_dialogue(
+        "Hiro",
+        "必要な情報を探して、その情報を使って回答する。"
+    )
+
+    play sound "voice/day52/day52_053.ogg" volume 1.5
+    $ renpy.pause(4.0, hard=True)
+
+    hide screen character_dialogue
+
+    show screen character_dialogue(
+        "AI Core",
+        "Company AI OSのKnowledge Layerを構築します。"
+    )
+
+    play sound "voice/day52/day52_054.ogg" volume 1.5
+    $ renpy.pause(4.5, hard=True)
+
+    hide screen character_dialogue
+
+    hide scene52_05
+    with dissolve
+
+
+    # ==========================================
+    # Scene 06
+    # RAG検索
+    # ==========================================
+
+    show scene52_06
+    with dissolve
+
+    show screen character_dialogue(
+        "Hiro",
+        "検索してみよう。"
+    )
+
+    play sound "voice/day52/day52_061.ogg" volume 1.5
+    $ renpy.pause(2.5, hard=True)
+
+    hide screen character_dialogue
+
+    show screen character_dialogue(
+        "AI Core",
+        "RAG検索を開始します。"
+    )
+
+    play sound "voice/day52/day52_062.ogg" volume 1.5
+    $ renpy.pause(3.5, hard=True)
+
+    hide screen character_dialogue
+
+    show screen character_dialogue(
+        "AI Core",
+        "関連するドキュメントを検出しました。"
+    )
+
+    play sound "voice/day52/day52_063.ogg" volume 1.5
+    $ renpy.pause(4.0, hard=True)
+
+    hide screen character_dialogue
+
+    show screen character_dialogue(
+        "Hiro",
+        "……ちゃんと資料を見つけた。"
+    )
+
+    play sound "voice/day52/day52_064.ogg" volume 1.5
+    $ renpy.pause(3.0, hard=True)
+
+    hide screen character_dialogue
+
+    hide scene52_06
+    with dissolve
+
+
+    # ==========================================
+    # Scene 07
+    # AIが会社の知識を使う
+    # ==========================================
+
+    show scene52_07
+    with dissolve
+
+    show screen character_dialogue(
+        "Hiro",
+        "じゃあ、このプロジェクトの目的を説明して。"
+    )
+
+    play sound "voice/day52/day52_071.ogg" volume 1.5
+    $ renpy.pause(4.0, hard=True)
+
+    hide screen character_dialogue
+
+    show screen character_dialogue(
+        "AI Core",
+        "Company AI OSは、AI社員が働く会社を構築し、その開発過程を記録するプロジェクトです。"
+    )
+
+    play sound "voice/day52/day52_072.ogg" volume 1.5
+    $ renpy.pause(9.0, hard=True)
+
+    hide screen character_dialogue
+
+    show screen character_dialogue(
+        "Hiro",
+        "……なるほど。"
+    )
+
+    play sound "voice/day52/day52_073.ogg" volume 1.5
+    $ renpy.pause(2.5, hard=True)
+
+    hide screen character_dialogue
+
+    show screen character_dialogue(
+        "Hiro",
+        "今度は、会社の資料を使って答えている。"
+    )
+
+    play sound "voice/day52/day52_074.ogg" volume 1.5
+    $ renpy.pause(4.3, hard=True)
+
+    hide screen character_dialogue
+
+    show screen character_dialogue(
+        "AI Core",
+        "検索した情報をもとに回答しています。"
+    )
+
+    play sound "voice/day52/day52_075.ogg" volume 1.5
+    $ renpy.pause(3.5, hard=True)
+
+    hide screen character_dialogue
+
+    hide scene52_07
+    with dissolve
+
+
+    # ==========================================
+    # Scene 08
+    # AI時代の幕開け
+    # ==========================================
+
+    show scene52_08
+    with dissolve
+
+    show screen character_dialogue(
+        "Hiro",
+        "AIを作るだけじゃない。"
+    )
+
+    play sound "voice/day52/day52_081.ogg" volume 1.5
+    $ renpy.pause(3.0, hard=True)
+
+    hide screen character_dialogue
+
+    show screen character_dialogue(
+        "Hiro",
+        "AIが、会社の知識を使えるようにする。"
+    )
+
+    play sound "voice/day52/day52_082.ogg" volume 1.5
+    $ renpy.pause(4.2, hard=True)
+
+    hide screen character_dialogue
+
+    show screen character_dialogue(
+        "AI Core",
+        "これで、AI社員は会社の情報を利用できます。"
+    )
+
+    play sound "voice/day52/day52_083.ogg" volume 1.5
+    $ renpy.pause(4.5, hard=True)
+
+    hide screen character_dialogue
+
+    show screen character_dialogue(
+        "Hiro",
+        "ここからだな。"
+    )
+
+    play sound "voice/day52/day52_084.ogg" volume 1.5
+    $ renpy.pause(3.0, hard=True)
+
+    hide screen character_dialogue
+
+    show screen character_dialogue(
+        "Narrator",
+        "AI社員を作る。"
+    )
+
+    play sound "voice/day52/day52_085.ogg" volume 1.5
+    $ renpy.pause(2.5, hard=True)
+
+    hide screen character_dialogue
+
+    show screen character_dialogue(
+        "Narrator",
+        "そして、会社の知識をつなぐ。"
+    )
+
+    play sound "voice/day52/day52_086.ogg" volume 1.5
+    $ renpy.pause(3.0, hard=True)
+
+    hide screen character_dialogue
+
+    show screen character_dialogue(
+        "Narrator",
+        "Company AI OSは、次の段階へ進み始めた。"
+    )
+
+    play sound "voice/day52/day52_087.ogg" volume 1.5
+    $ renpy.pause(4.0, hard=True)
+
+    hide screen character_dialogue
+
+    hide scene52_08
+    with dissolve
+
+
+    # ==========================================
+    # DAY52 COMPLETE
+    # ==========================================
+
+    scene black
+    with fade
+
+    show text "{size=52}DAY52{/size}\n\n{size=42}AI ERA BEGINS{/size}" at truecenter
+    with dissolve
+
+    $ renpy.pause(3.0, hard=True)
+
+    hide text
+    with dissolve
+
+    stop music fadeout 2.0
+
+    $ renpy.pause(2.0, hard=True)
+
+    return
 
 ### Related
 
@@ -1565,7 +2127,7 @@ Toolが修正を実行する。
 - DAY49　[YouTube](https://youtu.be/IqAPd3BX6iY)｜[note](https://note.com/grand_peony7915/n/n905e46176c65)
 - DAY50　[YouTube](https://youtu.be/n7fjLon-M88)｜[note](https://note.com/grand_peony7915/n/na02dadff1fe2)
 - DAY51　[YouTube](https://youtu.be/bRQyDGMG0_8)｜[note](https://note.com/grand_peony7915/n/n216e082ac1be)
-
+- DAY52　[YouTube](https://youtu.be/iKVxA3ylP5A)｜[note](https://note.com/grand_peony7915/n/n54c67d76d1c7)
 
 ## Author
 
