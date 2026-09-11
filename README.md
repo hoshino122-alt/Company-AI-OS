@@ -2110,6 +2110,238 @@ label day52:
 
     return
 
+game/
+└── day53.rpy
+
+voice/
+└── day53/
+    ├── day53_01.ogg
+    ├── day53_02.ogg
+    ├── day53_03.ogg
+    ├── day53_04.ogg
+    ├── day53_05.ogg
+    ├── day53_06.ogg
+    ├── day53_07.ogg
+    └── day53_08.ogg
+
+images/
+├── scene53_01.png
+├── scene53_02.png
+├── scene53_03.png
+├── scene53_04.png
+├── scene53_05.png
+├── scene53_06.png
+├── scene53_07.png
+└── scene53_08.png
+
+# DAY53｜Knowledge Base
+
+## 会社の知識を検索できる形にする
+
+Company AI OS 開発 DAY53。
+
+DAY52では、Company AI OSにRAGを導入するための考え方を整理しました。
+
+DAY53では、RAGを動かすための基盤となる
+「Knowledge Base」について取り組みます。
+
+---
+
+## DAY53のテーマ
+
+**会社の知識を検索できる形にする**
+
+会社には、
+
+- プロジェクト資料
+- 技術資料
+- 会議議事録
+- 開発記録
+- 社内資料
+
+など、多くの情報があります。
+
+しかし、大量の文書をそのまま保存するだけでは、
+必要な情報を効率よく検索することができません。
+
+そこで、会社の文書をAIが検索できる形へ変換していきます。
+
+---
+
+## Knowledge Baseの基本構造
+
+DAY53では、次の流れを整理しました。
+
+```text
+会社の資料
+    ↓
+Document
+    ↓
+Chunk
+    ↓
+Embedding
+    ↓
+Knowledge Base
+    ↓
+検索
+    ↓
+Relevant Documents
+
+1. Document
+
+会社に存在する文書をDocumentとして扱います。
+
+例：
+
+PDF
+Markdown
+テキスト
+技術資料
+会議資料
+開発記録
+2. Chunk
+
+大きな文書を、そのまま検索するのではなく、
+意味のまとまりごとに小さく分割します。
+
+Document
+   ↓
+Chunk 01
+Chunk 02
+Chunk 03
+Chunk 04
+...
+
+この小さな単位をChunkと呼びます。
+
+3. Embedding
+
+各ChunkをEmbeddingによってベクトル化します。
+
+Chunk
+  ↓
+Embedding
+  ↓
+Vector
+
+文章の意味を数値的なベクトルとして表現することで、
+意味の近い情報を検索するための準備を行います。
+
+4. Knowledge Base
+
+Embeddingされた知識をKnowledge Baseへ保存します。
+
+これによって、会社の情報をAIから検索できる状態へ近づけます。
+
+Knowledge Baseには、
+
+Vector Database
+Indexed Documents
+Semantic Search
+Access Control
+Continuous Update
+
+などの機能が必要になります。
+
+5. 検索
+
+ユーザーから質問を受けると、
+
+Query
+  ↓
+Embedding
+  ↓
+Knowledge Base
+  ↓
+Relevant Documents
+
+という流れで、質問に関連する情報を検索します。
+
+これがDAY52で扱ったRAGにつながっていきます。
+
+DAY53で整理したこと
+
+DAY53では、RAGそのものを完成させるのではなく、
+
+RAGが会社の知識を利用するためのKnowledge Base
+
+という考え方を整理しました。
+
+会社の情報を、
+
+保存するだけのデータ
+        ↓
+AIが検索できる知識
+
+へ変えていくことが今回のポイントです。
+
+制作方式の変更
+
+DAY52までとDAY53以降では、
+動画制作方式を変更しています。
+
+DAY52まで
+1シーン
+  ↓
+複数キャラクター
+  ↓
+キャラクターごとのセリフ
+  ↓
+個別音声
+DAY53以降
+1シーン
+  ↓
+1画像
+  ↓
+1ナレーション
+
+ナレーションによって、
+
+状況
+会話
+技術的な意味
+
+をまとめて説明します。
+
+これにより、音声制作・ファイル管理・Ren'Py実装を簡略化し、
+Company AI OSの開発そのものに集中できる構成にしています。
+
+Ren'Py
+
+DAY53では8シーンを使用します。
+
+scene53_01
+scene53_02
+scene53_03
+scene53_04
+scene53_05
+scene53_06
+scene53_07
+scene53_08
+
+各シーンに1枚の画像と1つのナレーション音声を対応させています。
+
+DAY53 Story
+新しい課題
+会社には情報が多すぎる
+そのままでは検索しにくい
+文書を分割する
+知識をベクトル化する
+Knowledge Baseへ
+最初の検索
+RAGが動き始める
+DAY53
+
+KNOWLEDGE BASE
+
+会社の知識が、AIの力で動き出す。
+
+Project
+
+Company AI OS
+
+100日でCompany AI OSを作る開発記録。
+
 ### Related
 
 ## 公開記録
@@ -2128,7 +2360,7 @@ label day52:
 - DAY50　[YouTube](https://youtu.be/n7fjLon-M88)｜[note](https://note.com/grand_peony7915/n/na02dadff1fe2)
 - DAY51　[YouTube](https://youtu.be/bRQyDGMG0_8)｜[note](https://note.com/grand_peony7915/n/n216e082ac1be)
 - DAY52　[YouTube](https://youtu.be/iKVxA3ylP5A)｜[note](https://note.com/grand_peony7915/n/n54c67d76d1c7)
-
+- DAY53　[YouTube](https://youtu.be/CMZrUlHZYmY)｜[note](https://note.com/grand_peony7915/n/n90a18e0773e5)
 ## Author
 
 Company AI OS Development Log
