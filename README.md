@@ -2531,6 +2531,246 @@ DAY53：Knowledge Baseを作る
 → DAY54：実際に検索する
 → DAY55：検索結果からAIが回答する
 
+DAY55｜RAG Answer
+# DAY55｜RAG Answer
+
+Company AI OSを100日で作るプロジェクト【DAY55】
+
+## 🎯 今日のテーマ
+
+**RAGで検索した会社の知識を使って、AIが回答する**
+
+DAY54では、RAGを使ってKnowledge Baseから
+質問に関連する情報を検索できるようにしました。
+
+しかし、検索結果が返ってくるだけでは、
+まだAIがユーザーの質問に答えているとは言えません。
+
+DAY55では、検索したRelevant ChunksをAI Coreへ渡し、
+その情報を使って回答を生成するところまで進めます。
+
+---
+
+## 🔍 DAY54からDAY55へ
+
+### DAY54
+
+```text
+ユーザーの質問
+      ↓
+Query
+      ↓
+Embedding
+      ↓
+Knowledge Base
+      ↓
+Relevant Chunks
+
+RAG検索によって、質問に関連する会社の知識を取得します。
+
+DAY55
+ユーザーの質問
+      ↓
+RAG Search
+      ↓
+Relevant Chunks
+      ↓
+AI Core
+      ↓
+AI Response
+
+検索した会社の知識をAI Coreへ渡し、
+その情報をもとに回答を生成します。
+
+💬 実際に質問する
+
+今回、次のような質問を試しました。
+
+「Company AI OSでは、なぜRAGを使っているの？」
+
+質問を受け取ると、
+
+Question
+   ↓
+Embedding
+   ↓
+Knowledge Base
+   ↓
+Relevant Chunks
+
+というRAG検索が実行されます。
+
+📚 Relevant Chunks
+
+Knowledge Baseから、
+質問に関連する情報を取得します。
+
+取得したRelevant Chunksは、
+AI Coreへ渡します。
+
+Relevant Chunks
+        ↓
+     AI Core
+        ↓
+  Answer Generation
+🤖 AIが回答を生成する
+
+AI Coreは検索結果をコンテキストとして利用し、
+会社の知識をもとに回答を生成します。
+
+今回の回答例：
+
+Company AI OSでは、会社の知識をAIが利用できるようにするため、
+RAGを導入しています。
+
+重要なのは、単純にLLMへ質問するのではなく、
+
+会社の知識を検索してから回答する
+
+という点です。
+
+🔄 別の質問でも確認
+
+さらに、
+
+「Knowledge Baseには何を保存していますか？」
+
+という別の質問も試しました。
+
+質問が変われば検索結果も変わり、
+
+質問
+ ↓
+検索
+ ↓
+Relevant Chunks
+ ↓
+AI Core
+ ↓
+回答
+
+という処理が再び実行されます。
+
+🧠 RAGの意味
+
+今回のDAY55で、
+RAGの役割がより明確になりました。
+
+単純なLLM
+
+質問
+ ↓
+AI
+ ↓
+回答
+
+ではなく、
+
+Company AI OS
+
+質問
+ ↓
+会社の知識を検索
+ ↓
+関連情報を取得
+ ↓
+AI Core
+ ↓
+回答
+
+という仕組みです。
+
+これによって、Company AI OSが
+会社の知識を利用して回答するAI
+へ近づいてきました。
+
+🏢 Company AI OSにおけるKnowledge Base
+
+Knowledge Baseは、
+単に会社の資料を保存する場所ではありません。
+
+AIが必要なときに、
+
+必要な知識を検索する
+関連する情報を取得する
+AI Coreへ渡す
+その知識を使って回答する
+
+という役割を持ちます。
+
+会社の資料
+      ↓
+Knowledge Base
+      ↓
+必要な知識を検索
+      ↓
+Relevant Chunks
+      ↓
+AI Core
+      ↓
+回答
+🛠️ 開発環境
+Python
+Ollama
+Local LLM
+RAG
+Knowledge Base
+Embedding
+AI Core
+Ren'Py
+📁 Files
+game/
+└── day55.rpy
+
+voice/
+└── day55/
+    ├── day55_01.ogg
+    ├── day55_02.ogg
+    ├── day55_03.ogg
+    ├── day55_04.ogg
+    ├── day55_05.ogg
+    ├── day55_06.ogg
+    ├── day55_07.ogg
+    └── day55_08.ogg
+
+images/
+└── scene55_01.png
+    ...
+    scene55_08.png
+🎬 DAY55
+
+DAY54では、
+
+RAGで会社の知識を検索する
+
+ところまで進みました。
+
+DAY55では、
+
+検索した会社の知識を使ってAIが回答する
+
+ところまで進みました。
+
+Company AI OSは、
+
+「会社の知識を検索できるAI」
+
+から、
+
+「会社の知識を使って答えるAI」
+
+へ進化しています。
+
+🚀 Next Step
+
+次は、RAGをCompany AI OSの
+より実際の業務へつなげていきます。
+
+AIが会社の知識を検索し、
+その知識を使って仕事を支援する。
+
+そのための基盤が、少しずつできてきました。
+
 ### Related
 
 ## 公開記録
@@ -2550,7 +2790,7 @@ DAY53：Knowledge Baseを作る
 - DAY51　[YouTube](https://youtu.be/bRQyDGMG0_8)｜[note](https://note.com/grand_peony7915/n/n216e082ac1be)
 - DAY52　[YouTube](https://youtu.be/iKVxA3ylP5A)｜[note](https://note.com/grand_peony7915/n/n54c67d76d1c7)
 - DAY53　[YouTube](https://youtu.be/CMZrUlHZYmY)｜[note](https://note.com/grand_peony7915/n/n90a18e0773e5)
-- DAY54　[YouTube](https://youtu.be/eVLqp8ZcLH0)｜[note](https://note.com/grand_peony7915/n/neec84f528f2e)
+- DAY54　[YouTube](https://youtu.be/cvWNs06f668)｜[note](https://note.com/grand_peony7915/n/n439df825ad8c)
 
 ## Author
 
