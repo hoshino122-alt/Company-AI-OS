@@ -2342,6 +2342,195 @@ Company AI OS
 
 100日でCompany AI OSを作る開発記録。
 
+# DAY54｜RAG Search
+
+Company AI OSを100日で作るプロジェクト【DAY54】
+
+## 🎯 今日のテーマ
+
+**RAGに質問して、会社の知識を取り出す**
+
+DAY53では、会社の資料をKnowledge Baseに登録しました。
+
+DAY54では、実際に質問を繰り返して、
+Knowledge Baseから関連する会社の知識を検索できることを確認しました。
+
+---
+
+## 🔍 RAG検索の流れ
+
+今回確認した基本的な流れです。
+
+ユーザーの質問
+
+↓
+
+Query
+
+↓
+
+Embedding
+
+↓
+
+Knowledge Base
+
+↓
+
+Relevant Chunks
+
+↓
+
+AI Core
+
+---
+
+## 💬 実際に質問してみる
+
+まず、
+
+「Company AI OSとは何ですか？」
+
+と質問しました。
+
+続いて、
+
+「Company AI OSでは、なぜRAGを導入するのですか？」
+
+「Knowledge Baseには何を保存しますか？」
+
+「Chunkとは何ですか？」
+
+「Embeddingは何のために使いますか？」
+
+など、複数の質問を繰り返しました。
+
+質問を変えることで、検索されるRelevant Chunksも変化します。
+
+---
+
+## 📚 Knowledge Base
+
+Knowledge Baseには、Company AI OSの開発過程で作成した情報を登録しています。
+
+RAG検索では、質問そのものをKnowledge Baseから探すのではなく、
+
+**質問 → Embedding → 関連するChunkを検索**
+
+という流れで情報を取得します。
+
+---
+
+## 📊 検索結果の確認
+
+検索結果では、
+
+- どのChunkが取得されたか
+- どの情報が質問に関連しているか
+- 検索結果のスコア
+
+などを確認します。
+
+RAGでは、回答だけを見るのではなく、
+**どの情報を検索して回答の根拠としているのか**
+を確認することも重要です。
+
+---
+
+## 🤖 AI Coreへの接続
+
+検索したRelevant Chunksは、
+次の段階でAI Coreへ渡します。
+
+今回のDAY54では、
+
+```text
+質問
+ ↓
+RAG検索
+ ↓
+Relevant Chunks
+ ↓
+AI Core
+
+という流れを確認しました。
+
+これによって、Company AI OSが
+会社のKnowledge Baseを利用して回答できるための基盤が整いました。
+
+🛠️ 開発環境
+Python
+Ollama
+Local LLM
+Knowledge Base
+Embedding
+RAG
+Ren'Py
+🎬 DAY54
+
+今回のDAY54では、
+RAGを単に説明するだけではなく、
+実際に何度も質問して検索結果を確認しました。
+
+Company AI OSが少しずつ、
+「会社の知識を利用できるAI」
+に近づいています。
+
+🚀 Next Step
+DAY55
+
+次は、検索したRelevant ChunksをAI Coreへ渡し、
+
+RAG検索結果を使ってAIが回答を生成する
+
+ところへ進みます。
+
+User Question
+      ↓
+   RAG Search
+      ↓
+Relevant Chunks
+      ↓
+    AI Core
+      ↓
+   AI Answer
+📁 Files
+game/
+└── day54.rpy
+
+voice/
+└── day54/
+    ├── day54_01.ogg
+    ├── day54_02.ogg
+    ├── day54_03.ogg
+    ├── day54_04.ogg
+    ├── day54_05.ogg
+    ├── day54_06.ogg
+    ├── day54_07.ogg
+    └── day54_08.ogg
+
+images/
+└── scene54_01.png
+    ...
+    scene54_08.png
+Company AI OS
+
+100日でCompany AI OSを作る
+
+DAY54 / RAG SEARCH
+
+
+### GitHubコミットメッセージ
+
+```text
+DAY54: RAG Searchを実装・検証
+
+今回はDAY53からの流れがきれいです。
+
+DAY53：Knowledge Baseを作る
+→ DAY54：実際に検索する
+→ DAY55：検索結果からAIが回答する
+
 ### Related
 
 ## 公開記録
@@ -2361,6 +2550,8 @@ Company AI OS
 - DAY51　[YouTube](https://youtu.be/bRQyDGMG0_8)｜[note](https://note.com/grand_peony7915/n/n216e082ac1be)
 - DAY52　[YouTube](https://youtu.be/iKVxA3ylP5A)｜[note](https://note.com/grand_peony7915/n/n54c67d76d1c7)
 - DAY53　[YouTube](https://youtu.be/CMZrUlHZYmY)｜[note](https://note.com/grand_peony7915/n/n90a18e0773e5)
+- DAY54　[YouTube](https://youtu.be/eVLqp8ZcLH0)｜[note](https://note.com/grand_peony7915/n/neec84f528f2e)
+
 ## Author
 
 Company AI OS Development Log
