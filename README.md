@@ -2771,6 +2771,68 @@ AIが会社の知識を検索し、
 
 そのための基盤が、少しずつできてきました。
 
+
+# DAY56｜AI Employee × RAG
+
+## AI社員が会社の知識を使って仕事をする
+
+DAY55までで、Company AI OSのAI Coreは、
+Knowledge Baseから会社の知識を検索し、
+その情報をもとに回答できるようになりました。
+
+DAY56では、そのRAGをAI社員の仕事へ接続します。
+
+---
+
+## 今回のテーマ
+
+これまでのRAGは、
+
+ユーザー
+↓
+質問
+↓
+RAG Search
+↓
+Relevant Chunks
+↓
+AI Core
+↓
+回答
+
+という流れでした。
+
+DAY56では、これをAI社員の仕事に利用します。
+
+---
+
+## AI社員への仕事依頼
+
+HiroからAI社員へ仕事を依頼します。
+
+「このプロジェクトについて、
+過去の資料を調べてまとめてくれる？」
+
+AI社員は、この依頼をTaskとして受け取ります。
+
+---
+
+## AI社員がKnowledge Baseを検索
+
+AI社員は、仕事に必要な情報を取得するため、
+Knowledge Baseを検索します。
+
+```text
+AI社員
+   ↓
+質問・タスク
+   ↓
+RAG Search
+   ↓
+Relevant Chunks
+
+
+
 ### Related
 
 ## 公開記録
@@ -2790,7 +2852,9 @@ AIが会社の知識を検索し、
 - DAY51　[YouTube](https://youtu.be/bRQyDGMG0_8)｜[note](https://note.com/grand_peony7915/n/n216e082ac1be)
 - DAY52　[YouTube](https://youtu.be/iKVxA3ylP5A)｜[note](https://note.com/grand_peony7915/n/n54c67d76d1c7)
 - DAY53　[YouTube](https://youtu.be/CMZrUlHZYmY)｜[note](https://note.com/grand_peony7915/n/n90a18e0773e5)
-- DAY54　[YouTube](https://youtu.be/cvWNs06f668)｜[note](https://note.com/grand_peony7915/n/n439df825ad8c)
+- DAY54　[YouTube](https://youtu.be/eVLqp8ZcLH0)｜[note](https://note.com/grand_peony7915/n/neec84f528f2e)
+- DAY55　[YouTube](https://youtu.be/cvWNs06f668)｜[note](https://note.com/grand_peony7915/n/n439df825ad8c)
+- DAY56　[YouTube](https://youtu.be/stsIfyGvi6M)｜[note](https://note.com/grand_peony7915/n/n85649859e621)
 
 ## Author
 
