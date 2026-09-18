@@ -3379,6 +3379,332 @@ Company AI OSが「AI社員がいる会社」から、AI社員同士が仕事を
 
 _____________________________________________________________________________________________________________
 
+DAY59｜複数のAI社員がWorkflowで連携する
+概要
+
+DAY58では、AI Agentが作成したExecution PlanをWorkflow Engineへ渡し、Taskを順番に実行する仕組みを整理しました。
+
+DAY59では、さらに一歩進めて、一つの仕事を複数のAI社員で分担する仕組みを構築します。
+
+今回のポイントは、
+
+Workflow Engineを中心に、複数のAI社員がそれぞれのTaskを担当する。
+
+という構造です。
+
+DAY58からDAY59へ
+
+DAY58では、一つのWorkflowの中でTaskを順番に実行しました。
+
+Workflow Engine
+ ↓
+Task 01
+ ↓
+Result
+ ↓
+Task 02
+ ↓
+Result
+ ↓
+Task 03
+
+DAY59では、それぞれのTaskを異なるAI社員が担当します。
+
+Workflow Engine
+      ↓
+AI社員A
+資料調査
+      ↓
+調査結果
+      ↓
+Workflow Engine
+      ↓
+AI社員B
+情報分析
+      ↓
+分析結果
+      ↓
+Workflow Engine
+      ↓
+AI社員C
+報告書作成
+      ↓
+Final Result
+1．仕事をAI社員ごとに分担する
+
+今回の仕事は、
+
+「このプロジェクトについて、
+過去の資料を調べて報告書を作ってくれる？」
+
+という依頼です。
+
+AI Agentによって仕事をTaskに分解します。
+
+Task 01
+過去資料の検索・調査
+
+Task 02
+情報の分析・整理
+
+Task 03
+報告書の作成
+
+そして、それぞれのTaskに担当するAI社員を割り当てます。
+
+Task 01 → AI社員A
+Task 02 → AI社員B
+Task 03 → AI社員C
+2．AI社員A｜資料を調査する
+
+AI社員Aは、資料調査を担当します。
+
+Task 01
+資料調査
+ ↓
+Knowledge Base / RAG
+ ↓
+関連資料
+ ↓
+調査結果
+
+DAY53〜DAY56で作ってきたKnowledge BaseとRAGを、実際の業務に利用します。
+
+AI社員Aは必要な会社の知識を検索し、次のTaskへ渡すための結果を作ります。
+
+3．Workflow Engineが結果を受け取る
+
+AI社員AのTaskが完了すると、結果はWorkflow Engineへ戻ります。
+
+AI社員A
+ ↓
+調査結果
+ ↓
+Workflow Engine
+
+Workflow Engineは結果を受け取り、次のTaskへ渡す準備をします。
+
+ここで重要なのは、
+
+AI社員AからAI社員Bへ直接結果を渡すわけではない
+
+ということです。
+
+Workflow Engineが間に入ることで、仕事の流れを一元的に管理します。
+
+4．AI社員B｜情報を分析する
+
+次に、AI社員BがTask 02を担当します。
+
+調査結果
+ ↓
+Workflow Engine
+ ↓
+AI社員B
+ ↓
+情報分析
+ ↓
+分析結果
+
+AI社員Bは、AI社員Aが集めた情報を入力として受け取り、必要な情報を整理・分析します。
+
+つまり、
+
+前のTaskのResultが、次のAI社員のInputになる。
+
+という仕組みです。
+
+5．AI社員C｜報告書を作成する
+
+AI社員Bの分析結果は、再びWorkflow Engineへ戻ります。
+
+AI社員B
+ ↓
+分析結果
+ ↓
+Workflow Engine
+ ↓
+AI社員C
+ ↓
+報告書作成
+
+AI社員Cは分析結果を使って、最終的な報告書を作成します。
+
+これによって、
+
+調査
+ ↓
+分析
+ ↓
+報告書作成
+
+という一連の仕事が完成します。
+
+6．複数のAI社員をWorkflowでつなぐ
+
+DAY59の中心となる構造です。
+
+        Workflow Engine
+              ↓
+        ┌─────┴─────┐
+        ↓           ↓
+    AI社員A       Task管理
+    資料調査
+        ↓
+      Result
+        ↓
+    AI社員B
+    情報分析
+        ↓
+      Result
+        ↓
+    AI社員C
+    報告書作成
+        ↓
+    Final Result
+
+Workflow Engineが仕事の流れを管理することで、複数のAI社員を一つのWorkflowに組み込むことができます。
+
+7．AI社員同士を直接つながない
+
+今回の設計では、AI社員同士を自由に直接接続する方式にはしていません。
+
+AI社員A
+   ↓
+Workflow Engine
+   ↓
+AI社員B
+   ↓
+Workflow Engine
+   ↓
+AI社員C
+
+という構造にしています。
+
+これにより、
+
+Taskの状態
+実行順序
+Input
+Output
+エラー
+Workflow全体の進行状況
+
+をWorkflow Engine側で管理できます。
+
+8．DAY59で実現した仕事の流れ
+
+今回の最終的な流れは、
+
+Hiro
+ ↓
+仕事を依頼
+ ↓
+AI Agent
+ ↓
+Execution Plan
+ ↓
+Workflow Engine
+ ↓
+AI社員A
+資料調査
+ ↓
+Result
+ ↓
+Workflow Engine
+ ↓
+AI社員B
+情報分析
+ ↓
+Result
+ ↓
+Workflow Engine
+ ↓
+AI社員C
+報告書作成
+ ↓
+Final Result
+
+です。
+
+一つのAI社員だけで全ての仕事を行うのではなく、役割ごとにAI社員がTaskを担当する形へ進みました。
+
+DAY53〜DAY59
+
+ここまでの流れを整理します。
+
+DAY53
+Knowledge Base
+会社の知識を保存
+
+↓
+
+DAY54
+RAG Search
+会社の知識を検索
+
+↓
+
+DAY55
+RAG Answer
+検索した知識から回答
+
+↓
+
+DAY56
+AI Employee × RAG
+AI社員が会社の知識を利用
+
+↓
+
+DAY57
+AI Agent
+仕事を理解・分解・計画
+
+↓
+
+DAY58
+Workflow
+Taskを順番に実行
+
+↓
+
+DAY59
+AI Employee Collaboration
+複数のAI社員がWorkflowで連携
+DAY59のポイント
+
+今回の重要なポイントは、
+
+Workflow Engineが、複数のAI社員を仕事の流れの中につなぐ。
+
+ということです。
+
+AI社員Aが調査し、その結果をAI社員Bが分析し、AI社員Cが報告書を作成する。
+
+それぞれのAI社員は、自分の担当する仕事に集中します。
+
+そしてWorkflow Engineが、その間をつなぎます。
+
+次のステップ
+
+DAY59で複数のAI社員をWorkflowに組み込む形が見えてきました。
+
+次の段階では、このWorkflowをさらに発展させ、
+
+Task
+ ↓
+担当AI社員
+ ↓
+実行
+ ↓
+Result
+ ↓
+次のTask
+
+という処理を、実際のCompany AI OSのシステムとして扱えるようにしていきます。
+
+____________________________________________________________________________________________________________________________________________________________
 
 
 ### Related
@@ -3405,6 +3731,8 @@ ________________________________________________________________________________
 - DAY56　[YouTube](https://youtu.be/stsIfyGvi6M)｜[note](https://note.com/grand_peony7915/n/n85649859e621)
 - DAY57　[YouTube](https://youtu.be/FcQeadaTWbE)｜[note](https://note.com/grand_peony7915/n/nd57f7961c1f1)
 - DAY58　[YouTube](https://youtu.be/ysGjTDwOjeo)｜[note](https://note.com/grand_peony7915/n/nb022f4cf62d1)
+- DAY59　[YouTube](https://youtu.be/6fvFa-UOxS0)｜[note](https://note.com/grand_peony7915/n/n3454b111812f)
+
 
 ## Author
 
