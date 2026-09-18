@@ -3125,6 +3125,262 @@ AI Agent
 
 次はWorkflowへ。
 
+_______________________________________________________________________________________________________________
+
+DAY58｜Workflowで仕事を動かす
+概要
+
+DAY57では、AI Agentを使って依頼された仕事を理解し、Taskに分解してExecution Planを作りました。
+
+DAY58では、そのExecution PlanをWorkflow Engineへ渡し、実際にTaskを順番に実行する仕組みを整理しました。
+
+今回のポイントは、
+
+AI Agentが仕事を設計し、Workflow Engineがその計画に沿って仕事を実行する。
+
+という役割分担です。
+
+DAY57からDAY58へ
+DAY57｜AI Agent
+依頼
+ ↓
+仕事を理解
+ ↓
+Taskに分解
+ ↓
+実行順序を決定
+ ↓
+Execution Plan
+
+DAY57では、仕事を「どう進めるか」を設計しました。
+
+DAY58｜Workflow
+Execution Plan
+ ↓
+Workflow Engine
+ ↓
+Task 01
+ ↓
+Result
+ ↓
+Task 02
+ ↓
+Result
+ ↓
+Task 03
+ ↓
+Task 04
+ ↓
+Task 05
+ ↓
+最終成果物
+
+DAY58では、設計した仕事を「実際に動かす」段階へ進みます。
+
+Workflow Engineの役割
+
+Workflow Engineは、Execution Planを受け取り、Taskの実行を管理します。
+
+主な役割は、
+
+Taskの実行順序を管理
+Taskを実行
+Taskの結果を受け取る
+結果を次のTaskへ渡す
+Taskの状態を管理
+Workflow全体の進行を管理
+
+です。
+
+Taskの実行
+
+今回の例では、次のような仕事を想定しています。
+
+「このプロジェクトについて、
+過去の資料を調べて報告書を作ってくれる？」
+
+AI Agentによって、仕事を次のTaskに分解します。
+
+Task 01
+過去資料の検索
+
+Task 02
+関連情報の収集
+
+Task 03
+情報の整理・分析
+
+Task 04
+報告書の構成作成
+
+Task 05
+報告書を作成
+
+Workflow Engineは、このExecution Planに従ってTaskを実行します。
+
+TaskとResult
+
+Workflowでは、Task単体ではなく、Taskの結果を次のTaskへ渡すことが重要です。
+
+Task 01
+過去資料の検索
+ ↓
+Result
+ ↓
+Task 02
+関連情報の収集
+ ↓
+Result
+ ↓
+Task 03
+情報の整理・分析
+
+この仕組みによって、一つの仕事を複数のTaskに分けて処理できます。
+
+Workflowの状態管理
+
+Workflow Engineでは、各Taskの状態も管理します。
+
+例えば、
+
+Task 01  完了
+Task 02  完了
+Task 03  実行中
+Task 04  待機中
+Task 05  待機中
+
+という状態です。
+
+さらに、実際のWorkflowでは、
+
+workflow_id
+task_id
+employee
+status
+input
+output
+created_at
+completed_at
+error
+
+などの情報を管理することを想定しています。
+
+AI AgentとWorkflowの役割
+
+今回、AI AgentとWorkflowの役割を分けました。
+
+AI Agent
+仕事を理解する
+ ↓
+Taskに分解する
+ ↓
+実行計画を作る
+Workflow Engine
+Execution Planを受け取る
+ ↓
+Taskを実行する
+ ↓
+Resultを受け取る
+ ↓
+次のTaskへ渡す
+ ↓
+進行状態を管理する
+AI社員
+WorkflowからTaskを受け取る
+ ↓
+Taskを実行する
+ ↓
+結果を返す
+Company AI OSの現在の流れ
+
+DAY53〜DAY58までをつなげると、次のようになります。
+
+会社の知識
+ ↓
+Knowledge Base
+ ↓
+RAG
+ ↓
+AI Core
+ ↓
+AI社員
+ ↓
+AI Agent
+ ↓
+Execution Plan
+ ↓
+Workflow Engine
+ ↓
+Task実行
+ ↓
+Result
+ ↓
+次のTask
+ ↓
+最終成果物
+
+これまで作ってきたKnowledge Base、RAG、AI社員、AI Agentが、Workflowによって一つの仕事の流れにつながってきました。
+
+DAY58で整理したこと
+
+今回のDAY58では、
+
+Execution PlanをWorkflowへ渡す
+Taskを順番に実行する
+Taskの結果を受け取る
+結果を次のTaskへ渡す
+Workflow全体の状態を管理する
+
+という仕組みを整理しました。
+
+今回の重要ポイント
+
+Company AI OSでは、
+
+AI Agentが仕事を設計し、Workflow Engineがその計画に沿って仕事を動かし、AI社員がTaskを実行する。
+
+という構造を目指します。
+
+DAY57が、
+
+「仕事を設計する」
+
+だったのに対して、
+
+DAY58は、
+
+「設計した仕事を動かす」
+
+です。
+
+次のステップ
+
+Workflow Engineによって、一つのAI社員がTaskを順番に実行する仕組みが見えてきました。
+
+次はさらに、
+
+Workflow Engine
+      ↓
+AI社員A
+      ↓
+Result
+      ↓
+AI社員B
+      ↓
+Result
+      ↓
+AI社員C
+      ↓
+最終成果物
+
+という、複数のAI社員がWorkflowの中で連携する仕組みへ進みます。
+
+Company AI OSが「AI社員がいる会社」から、AI社員同士が仕事をつなぐ会社へ進むための次の段階です。
+
+_____________________________________________________________________________________________________________
+
+
+
 ### Related
 
 ## 公開記録
@@ -3147,7 +3403,8 @@ AI Agent
 - DAY54　[YouTube](https://youtu.be/eVLqp8ZcLH0)｜[note](https://note.com/grand_peony7915/n/neec84f528f2e)
 - DAY55　[YouTube](https://youtu.be/cvWNs06f668)｜[note](https://note.com/grand_peony7915/n/n439df825ad8c)
 - DAY56　[YouTube](https://youtu.be/stsIfyGvi6M)｜[note](https://note.com/grand_peony7915/n/n85649859e621)
-- DAY56　[YouTube](https://youtu.be/FcQeadaTWbE)｜[note](https://note.com/grand_peony7915/n/nd57f7961c1f1)
+- DAY57　[YouTube](https://youtu.be/FcQeadaTWbE)｜[note](https://note.com/grand_peony7915/n/nd57f7961c1f1)
+- DAY58　[YouTube](https://youtu.be/ysGjTDwOjeo)｜[note](https://note.com/grand_peony7915/n/nb022f4cf62d1)
 
 ## Author
 
