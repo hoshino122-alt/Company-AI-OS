@@ -3706,6 +3706,228 @@ Result
 
 ____________________________________________________________________________________________________________________________________________________________
 
+DAY60｜Workflowの状態を管理する
+概要
+
+DAY59では、複数のAI社員がWorkflow Engineを通して連携し、一つの仕事を分担できるようになりました。
+
+しかし、AI社員が複数のTaskを実行するようになると、
+
+「今、仕事はどこまで進んでいるのか？」
+
+という問題が出てきます。
+
+DAY60では、WorkflowとTaskの**実行状態（State）**を管理する仕組みを整理します。
+
+DAY60のテーマ
+
+Workflow State Management
+
+Workflowの状態を管理し、AI社員が進めている仕事をシステムとして追跡できるようにします。
+
+Taskの状態
+
+今回、Taskには以下の4つの状態を定義します。
+
+PENDING
+   ↓
+RUNNING
+   ↓
+COMPLETED
+
+エラーが発生した場合：
+
+RUNNING
+   ↓
+FAILED
+State	内容
+PENDING	まだ開始されていない
+RUNNING	現在実行中
+COMPLETED	正常に完了
+FAILED	エラーなどによって失敗
+Workflowの基本的な流れ
+Workflow
+    ↓
+Task 01
+    ↓
+COMPLETED
+    ↓
+Task 02
+    ↓
+COMPLETED
+    ↓
+Task 03
+    ↓
+RUNNING
+    ↓
+COMPLETED
+    ↓
+Task 04
+    ↓
+...
+
+Taskの状態を確認することで、現在どのTaskが実行されているのかを把握できます。
+
+エラーが発生した場合
+
+Workflowの実行中には、エラーが発生する可能性があります。
+
+Task 04
+   ↓
+RUNNING
+   ↓
+ERROR
+   ↓
+FAILED
+
+Workflow Engineはエラーを検知し、Taskの状態をFAILEDに更新します。
+
+その後、
+
+エラー内容の確認
+再実行
+別の処理方法
+人間による確認
+
+などの処理につなげることができます。
+
+Workflow全体の状態
+
+Task単位だけではなく、Workflow全体の状態も管理します。
+
+Workflow ID
+STATUS
+PROGRESS
+CURRENT TASK
+ERROR
+RESULT
+
+これにより、
+
+Workflow
+   ↓
+現在のTask
+   ↓
+Task State
+   ↓
+Result
+   ↓
+Next Task
+
+という仕事全体の流れを追跡できます。
+
+DAY60で確認したこと
+
+今回のDAY60では、Workflowの状態を画面上で確認できるようにしました。
+
+WORKFLOW STATUS
+
+Task 01   COMPLETED
+Task 02   COMPLETED
+Task 03   RUNNING
+Task 04   PENDING
+Task 05   PENDING
+
+さらに、Taskが完了すると次のTaskへ進み、エラーが発生するとFAILEDになるというWorkflowの状態変化を確認しました。
+
+DAY53〜DAY60
+
+Company AI OSの流れは、次のように進んできました。
+
+DAY53
+Knowledge Base
+        ↓
+DAY54
+RAG Search
+        ↓
+DAY55
+RAG Answer
+        ↓
+DAY56
+AI Employee × RAG
+        ↓
+DAY57
+AI Agent
+        ↓
+DAY58
+Workflow
+        ↓
+DAY59
+複数AI社員 × Workflow
+        ↓
+DAY60
+Workflow State
+
+これによって、
+
+会社の知識
+    ↓
+Knowledge Base
+    ↓
+RAG
+    ↓
+AI社員
+    ↓
+AI Agent
+    ↓
+Workflow
+    ↓
+複数AI社員
+    ↓
+Workflow State
+
+という流れになりました。
+
+DAY60のポイント
+
+DAY60で重要なのは、単純にTaskへ状態を追加することではありません。
+
+AI社員が進めている仕事を、システムとして追跡できるようにすることです。
+
+AI Agentが仕事を設計し、
+
+Workflow Engineが仕事を動かし、
+
+Workflow Stateが仕事の状態を管理する。
+
+この3つが組み合わさることで、Company AI OSの「仕事を動かす仕組み」が一段階進みました。
+
+次のステップ
+
+Workflowの状態を管理できるようになりました。
+
+しかし、FAILEDになったTaskをそのまま停止させるだけでは、実際の業務では十分ではありません。
+
+次のステップでは、
+
+エラー処理とTaskの再実行
+
+について考えていきます。
+
+Project Structure
+game/
+├── day60.rpy
+├── scene60_01.png
+├── scene60_02.png
+├── scene60_03.png
+├── scene60_04.png
+├── scene60_05.png
+├── scene60_06.png
+├── scene60_07.png
+└── scene60_08.png
+
+voice/
+└── day60/
+    ├── day60_01.ogg
+    ├── day60_02.ogg
+    ├── day60_03.ogg
+    ├── day60_04.ogg
+    ├── day60_05.ogg
+    ├── day60_06.ogg
+    ├── day60_07.ogg
+    └── day60_08.ogg
+____________________________________________________________________________________________________________________________________________________________
+
 
 ### Related
 
@@ -3732,7 +3954,7 @@ ________________________________________________________________________________
 - DAY57　[YouTube](https://youtu.be/FcQeadaTWbE)｜[note](https://note.com/grand_peony7915/n/nd57f7961c1f1)
 - DAY58　[YouTube](https://youtu.be/ysGjTDwOjeo)｜[note](https://note.com/grand_peony7915/n/nb022f4cf62d1)
 - DAY59　[YouTube](https://youtu.be/6fvFa-UOxS0)｜[note](https://note.com/grand_peony7915/n/n3454b111812f)
-
+- DAY60　[YouTube](https://youtu.be/YgLrcXBit9k)｜[note](https://note.com/grand_peony7915/n/ne7986056a661)
 
 ## Author
 
