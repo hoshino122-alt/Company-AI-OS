@@ -3928,6 +3928,340 @@ voice/
     └── day60_08.ogg
 ____________________________________________________________________________________________________________________________________________________________
 
+DAY61｜Workflowのエラーから復旧する
+概要
+
+DAY60では、Workflowの状態を管理する仕組みを整理しました。
+
+Taskには、
+
+PENDING
+RUNNING
+COMPLETED
+FAILED
+
+という状態を持たせています。
+
+しかし、実際にWorkflowを動かすと、Taskが失敗することがあります。
+
+そこでDAY61では、
+
+「FAILEDになったTaskを、どうやって復旧するか」
+
+をテーマにしました。
+
+DAY61のテーマ
+
+Error Recovery
+
+エラーを検知し、原因を確認し、失敗したTaskを再実行してWorkflowを再開します。
+
+DAY61のWorkflow
+Task実行
+    ↓
+エラー発生
+    ↓
+FAILED
+    ↓
+Workflow PAUSED
+    ↓
+エラー内容を確認
+    ↓
+原因を確認
+    ↓
+Retry
+    ↓
+RUNNING
+    ↓
+COMPLETED
+    ↓
+Workflow再開
+1．エラーが発生する
+
+Workflowの実行中にTask 04でエラーが発生したとします。
+
+Task 01   COMPLETED
+Task 02   COMPLETED
+Task 03   COMPLETED
+Task 04   FAILED
+Task 05   PENDING
+
+Workflow EngineはTaskの失敗を検知します。
+
+2．Workflowを一時停止する
+
+Task 04が失敗した状態で、そのまま次のTaskを実行するのではなく、Workflowを一時停止します。
+
+Task 04
+RUNNING
+   ↓
+FAILED
+
+Workflow
+   ↓
+PAUSED
+
+まずエラーの内容を確認します。
+
+3．エラーの原因を確認する
+
+実行ログを確認し、Taskが失敗した原因を調べます。
+
+今回のDAY61では、RAG検索処理でタイムアウトが発生したケースを想定しています。
+
+ERROR LOG
+
+Task 04
+STATUS: FAILED
+
+RAG search failed
+Request timeout
+
+原因を確認したうえで、Taskを再実行できるか判断します。
+
+4．Retry
+
+再実行可能なTaskであれば、Retryを実行します。
+
+FAILED
+   ↓
+PENDING
+   ↓
+RUNNING
+
+Workflow全体を最初からやり直すのではなく、失敗したTaskから復旧することがポイントです。
+
+5．Taskが成功する
+
+RetryによってTask 04が正常に完了すると、
+
+Task 04
+
+RUNNING
+   ↓
+COMPLETED
+
+となります。
+
+Workflow Engineは実行結果を保存し、Taskの状態を更新します。
+
+6．Workflowを再開する
+
+Task 04が完了したことで、Workflowを再開します。
+
+Task 01   COMPLETED
+Task 02   COMPLETED
+Task 03   COMPLETED
+Task 04   COMPLETED
+Task 05   RUNNING
+
+Task 04までの処理結果を維持したまま、次のTaskへ進みます。
+
+7．Error Recovery
+
+DAY61で整理した考え方は、
+
+Error
+  ↓
+Detect
+  ↓
+Analyze
+  ↓
+Retry
+  ↓
+Recover
+  ↓
+Continue Workflow
+
+です。
+
+これにより、Workflowは単にTaskを順番に実行するだけではなく、エラーが発生した場合にも復旧して仕事を続けることができます。
+
+DAY60との関係
+
+DAY60ではWorkflow Stateを扱いました。
+
+PENDING
+RUNNING
+COMPLETED
+FAILED
+
+DAY61では、その状態を利用してエラーから復旧します。
+
+DAY60
+Workflow State
+       ↓
+FAILEDを検知
+       ↓
+DAY61
+Error Recovery
+       ↓
+Retry
+       ↓
+Workflow再開
+
+つまり、DAY60で作った「状態管理」が、DAY61では「エラー復旧」の基盤になります。
+
+DAY53〜DAY61
+DAY53
+Knowledge Base
+        ↓
+DAY54
+RAG Search
+        ↓
+DAY55
+RAG Answer
+        ↓
+DAY56
+AI Employee × RAG
+        ↓
+DAY57
+AI Agent
+        ↓
+DAY58
+Workflow
+        ↓
+DAY59
+複数AI社員 × Workflow
+        ↓
+DAY60
+Workflow State
+        ↓
+DAY61
+Error Recovery
+
+Company AI OSは、
+
+会社の知識をAIが利用する
+
+ところから、
+
+AI社員がWorkflowで仕事を進める
+
+ところへ進み、さらに、
+
+エラーが発生してもWorkflowを復旧できる
+
+段階へ進みました。
+
+DAY61のポイント
+
+DAY61で重要なのは、エラーを「例外的なもの」として扱わないことです。
+
+実際の業務システムでは、通信エラー、検索エラー、外部サービスの障害など、さまざまな問題が発生する可能性があります。
+
+そのため、
+
+正常に動く
+
+だけではなく、
+
+失敗する
+ ↓
+検知する
+ ↓
+原因を確認する
+ ↓
+復旧する
+ ↓
+仕事を続ける
+
+という設計が必要になります。
+
+Project Structure
+game/
+├── day61.rpy
+├── scene61_01.png
+├── scene61_02.png
+├── scene61_03.png
+├── scene61_04.png
+├── scene61_05.png
+├── scene61_06.png
+├── scene61_07.png
+└── scene61_08.png
+
+voice/
+└── day61/
+    ├── day61_01.ogg
+    ├── day61_02.ogg
+    ├── day61_03.ogg
+    ├── day61_04.ogg
+    ├── day61_05.ogg
+    ├── day61_06.ogg
+    ├── day61_07.ogg
+    └── day61_08.ogg
+DAY61 Ren'Py
+
+DAY61では、8つのシーンを使ってWorkflowのError Recoveryを表現しています。
+
+SCENE61_01
+エラーが発生した
+
+SCENE61_02
+エラーを確認する
+
+SCENE61_03
+エラーの原因を確認する
+
+SCENE61_04
+再実行できるTask
+
+SCENE61_05
+Taskを再実行する
+
+SCENE61_06
+Taskが成功する
+
+SCENE61_07
+Workflowを再開する
+
+SCENE61_08
+エラーから復旧する
+次のステップ
+
+DAY61では、人間がRetryを実行することでWorkflowを復旧しました。
+
+次に考えられるのは、
+
+「一時的なエラーなら、毎回人間がRetryする必要があるのか？」
+
+という問題です。
+
+ここから、
+
+Manual Retry
+     ↓
+Automatic Retry
+     ↓
+Retry Policy
+     ↓
+Error Handling
+
+という方向へ発展させることができます。
+
+DAY61｜まとめ
+
+エラーを検知し、原因を確認し、Taskを再実行する。そしてWorkflowを途中から再開する。
+
+AI Agent
+    ↓
+Workflow Engine
+    ↓
+AI Employee
+    ↓
+Task
+    ↓
+State
+    ↓
+Error
+    ↓
+Recovery
+    ↓
+Workflow Continue
+
+DAY60で「状態を管理する」仕組みを作り、DAY61ではその状態を使って「エラーから復旧する」仕組みへ進みました。
+
+____________________________________________________________________________________________________________________________________________________________
 
 ### Related
 
@@ -3955,6 +4289,7 @@ ________________________________________________________________________________
 - DAY58　[YouTube](https://youtu.be/ysGjTDwOjeo)｜[note](https://note.com/grand_peony7915/n/nb022f4cf62d1)
 - DAY59　[YouTube](https://youtu.be/6fvFa-UOxS0)｜[note](https://note.com/grand_peony7915/n/n3454b111812f)
 - DAY60　[YouTube](https://youtu.be/YgLrcXBit9k)｜[note](https://note.com/grand_peony7915/n/ne7986056a661)
+- DAY61　[YouTube](https://youtu.be/vz9tWX94Mkc)｜[note](https://note.com/grand_peony7915/n/nd12b07571cad)
 
 ## Author
 
