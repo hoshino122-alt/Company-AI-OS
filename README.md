@@ -4263,6 +4263,399 @@ DAY60で「状態を管理する」仕組みを作り、DAY61ではその状態�
 
 ____________________________________________________________________________________________________________________________________________________________
 
+DAY62｜Workflowが自動でエラーから復旧する
+概要
+
+DAY61では、Workflowでエラーが発生したTaskを、人間が確認してRetryすることで復旧しました。
+
+しかし、実際のWorkflowでは、一時的なエラーが発生するたびに人間がRetryを操作する必要はありません。
+
+そこでDAY62では、
+
+Workflow EngineがRetry Policyに従って、自動的にTaskを再実行する
+
+仕組みを整理します。
+
+DAY62のテーマ
+
+Automatic Retry
+
+一時的なエラーが発生した場合、Workflow Engineがエラーを判定し、条件に合えば自動的にTaskを再実行します。
+
+DAY61 → DAY62
+DAY61
+ERROR
+ ↓
+人間が確認
+ ↓
+人間がRetry
+ ↓
+Workflow再開
+DAY62
+ERROR
+ ↓
+Workflow Engineが検知
+ ↓
+エラー種別を確認
+ ↓
+Retry Policyを確認
+ ↓
+自動Retry
+ ↓
+SUCCESS
+ ↓
+Workflow再開
+
+DAY62では、エラーからの復旧を人間の操作だけに依存しない形へ進めます。
+
+1．エラーが発生する
+
+Workflow実行中にTask 04でエラーが発生します。
+
+Task 01   COMPLETED
+Task 02   COMPLETED
+Task 03   COMPLETED
+Task 04   FAILED
+Task 05   PENDING
+Task 06   PENDING
+
+Workflow EngineはTask 04の失敗を検知します。
+
+2．Retry可能なエラーか判断する
+
+すべてのエラーを自動Retryするわけではありません。
+
+例えば、
+
+TIMEOUT
+NETWORK ERROR
+SERVER BUSY
+
+など、一時的な問題が考えられるエラーはRetry対象にできます。
+
+一方、
+
+INVALID DATA
+AUTH ERROR
+PERMISSION ERROR
+
+などは、人間による確認が必要になる場合があります。
+
+そのため、Workflow Engineはまずエラーの種類を確認します。
+
+ERROR
+  ↓
+Error Type
+  ↓
+Retry可能？
+3．Retry Policy
+
+自動Retryを行うためには、あらかじめルールを設定します。
+
+これをRetry Policyとして管理します。
+
+例：
+
+Retry Policy
+
+最大Retry回数：3回
+Retry間隔：5秒
+
+Retry対象：
+- TIMEOUT
+- NETWORK ERROR
+- SERVER BUSY
+
+Retry Policyによって、
+
+どのエラーをRetryするか
+最大何回までRetryするか
+Retryの間隔をどうするか
+
+を決めます。
+
+4．自動Retry
+
+Retry Policyの条件に一致した場合、Workflow EngineがTaskを自動的に再実行します。
+
+FAILED
+   ↓
+PENDING
+   ↓
+RUNNING
+
+DAY61とは違い、ここでは人間がRetryボタンを操作する必要はありません。
+
+5．1回目のRetryが失敗する
+
+1回目のRetryでもエラーが発生する場合があります。
+
+Retry 1
+   ↓
+FAILED
+
+しかし、最大Retry回数が3回なら、まだRetry可能です。
+
+Retry Count
+
+1 / 3
+
+Workflow EngineはRetry Policyを確認し、次のRetryへ進みます。
+
+6．2回目のRetryで成功する
+
+2回目のRetryを実行します。
+
+Retry 2
+   ↓
+RUNNING
+   ↓
+COMPLETED
+
+Task 04が正常に完了すると、Workflow Engineは結果を保存します。
+
+Task 04
+COMPLETED
+
+これでWorkflowを再開できます。
+
+7．Workflowを自動で再開する
+
+Task 04の成功を確認すると、Workflow Engineは次のTaskへ進みます。
+
+Task 01   COMPLETED
+Task 02   COMPLETED
+Task 03   COMPLETED
+Task 04   COMPLETED
+Task 05   RUNNING
+Task 06   PENDING
+
+エラー発生から復旧まで、人間が操作することなくWorkflowが進みます。
+
+8．自動Retryで仕事を止めない
+
+最終的には、
+
+WORKFLOW COMPLETED
+
+まで到達します。
+
+今回の流れは、
+
+エラー発生
+    ↓
+エラー検知
+    ↓
+エラー分類
+    ↓
+Retry Policy
+    ↓
+自動Retry
+    ↓
+Retry 1 → FAILED
+    ↓
+Retry 2 → SUCCESS
+    ↓
+Workflow再開
+    ↓
+仕事を継続
+
+です。
+
+Retry Policyの考え方
+
+自動Retryで重要なのは、何でも自動化することではありません。
+
+エラー
+  ↓
+分類
+  ↓
+┌──────────────┐
+│ Retry可能？  │
+└──────────────┘
+      ↓
+   YES       NO
+    ↓         ↓
+自動Retry   停止
+              ↓
+          人間が確認
+
+という判断を入れることが重要です。
+
+自動Retryに向いているのは、一時的に発生する可能性が高いエラーです。
+
+DAY60〜DAY62
+DAY60
+Workflow State
+状態を管理する
+        ↓
+DAY61
+Error Recovery
+エラーから復旧する
+        ↓
+DAY62
+Automatic Retry
+エラーから自動復旧する
+
+この3日間で、Workflowは、
+
+状態を把握する → エラーから復旧する → 復旧を自動化する
+
+という段階へ進みました。
+
+DAY53〜DAY62
+DAY53
+Knowledge Base
+        ↓
+DAY54
+RAG Search
+        ↓
+DAY55
+RAG Answer
+        ↓
+DAY56
+AI Employee × RAG
+        ↓
+DAY57
+AI Agent
+        ↓
+DAY58
+Workflow
+        ↓
+DAY59
+AI Employee Collaboration
+        ↓
+DAY60
+Workflow State
+        ↓
+DAY61
+Error Recovery
+        ↓
+DAY62
+Automatic Retry
+
+Company AI OSは、会社の知識をAIが利用する段階から、AI社員がWorkflowを使って仕事を進め、さらにエラーが発生しても仕事を継続できる仕組みへ進んでいます。
+
+DAY62のポイント
+
+DAY62のポイントは、
+
+一時的なエラーでWorkflow全体を止めない
+
+ことです。
+
+Workflow Engineが、
+
+Error Detection
+      ↓
+Error Classification
+      ↓
+Retry Policy
+      ↓
+Automatic Retry
+      ↓
+Recovery
+      ↓
+Workflow Continue
+
+という流れを管理します。
+
+Project Structure
+game/
+├── day62.rpy
+├── scene62_01.png
+├── scene62_02.png
+├── scene62_03.png
+├── scene62_04.png
+├── scene62_05.png
+├── scene62_06.png
+├── scene62_07.png
+└── scene62_08.png
+
+voice/
+└── day62/
+    ├── day62_01.ogg
+    ├── day62_02.ogg
+    ├── day62_03.ogg
+    ├── day62_04.ogg
+    ├── day62_05.ogg
+    ├── day62_06.ogg
+    ├── day62_07.ogg
+    └── day62_08.ogg
+DAY62 Ren'Py Scenes
+SCENE62_01
+またエラーが発生した
+
+SCENE62_02
+Retryできるエラーか判断する
+
+SCENE62_03
+Retry Policyを確認する
+
+SCENE62_04
+自動Retryを実行する
+
+SCENE62_05
+1回目のRetryが失敗する
+
+SCENE62_06
+2回目のRetryで成功する
+
+SCENE62_07
+Workflowが自動で再開する
+
+SCENE62_08
+自動Retryで仕事を止めない
+次のステップ
+
+DAY62では、自動Retryによって一時的なエラーからWorkflowを復旧できるようになりました。
+
+しかし、次の問題があります。
+
+Retry 1 → FAILED
+Retry 2 → FAILED
+Retry 3 → FAILED
+
+最大Retry回数まで失敗した場合です。
+
+いつまでも自動Retryを続けることはできません。
+
+そこで次の段階では、
+
+Retry上限に達した場合にWorkflowを停止し、人間へ判断を戻す仕組み
+
+が必要になります。
+
+自動化が進むほど、
+
+「どこまでAIに任せ、どこから人間が判断するのか」
+
+という境界が重要になります。
+
+DAY62｜まとめ
+
+Workflow EngineがRetry Policyに従って一時的なエラーを自動Retryし、Workflowを止めずに仕事を続けられるようになった。
+
+AI Agent
+    ↓
+Workflow Engine
+    ↓
+AI Employee
+    ↓
+Task
+    ↓
+State
+    ↓
+Error Detection
+    ↓
+Retry Policy
+    ↓
+Automatic Retry
+    ↓
+Workflow Continue
+
+____________________________________________________________________________________________________________________________________________________________
+
 ### Related
 
 ## 公開記録
@@ -4290,6 +4683,8 @@ ________________________________________________________________________________
 - DAY59　[YouTube](https://youtu.be/6fvFa-UOxS0)｜[note](https://note.com/grand_peony7915/n/n3454b111812f)
 - DAY60　[YouTube](https://youtu.be/YgLrcXBit9k)｜[note](https://note.com/grand_peony7915/n/ne7986056a661)
 - DAY61　[YouTube](https://youtu.be/vz9tWX94Mkc)｜[note](https://note.com/grand_peony7915/n/nd12b07571cad)
+- DAY61　[YouTube](https://youtu.be/5Lju1rkmiVo)｜[note](https://note.com/grand_peony7915/n/n077e6490c91c)
+
 
 ## Author
 
