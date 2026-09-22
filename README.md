@@ -4656,6 +4656,350 @@ Workflow Continue
 
 ____________________________________________________________________________________________________________________________________________________________
 
+# DAY63｜AIと人間の役割分担
+
+## Company AI OS
+
+DAY63では、Workflow Engineの自動Retryに
+「Retry上限」と「Human Intervention」を追加します。
+
+DAY62では、一時的なエラーが発生した場合、
+Workflow Engineが自動でRetryできるようになりました。
+
+しかし、Retryを繰り返してもTaskが成功しない場合、
+AIに無限にRetryさせることはできません。
+
+そこで今回は、
+
+- Retry上限
+- Workflowの一時停止
+- AIによるエラー整理
+- Human Intervention
+- 人間によるWorkflow再開
+
+という仕組みを考えます。
+
+---
+
+# 1. Retryしても成功しない
+
+Task 04でエラーが発生し、
+自動Retryを実行します。
+
+```text
+Task 04
+   ↓
+FAILED
+   ↓
+Retry 1
+   ↓
+FAILED
+   ↓
+Retry 2
+   ↓
+FAILED
+   ↓
+Retry 3
+   ↓
+FAILED
+
+3回Retryしても成功しない状態です。
+
+このような場合、
+さらにRetryを続けるのではなく、
+自動Retryを停止する必要があります。
+
+2. Retry上限
+
+Workflow EngineにはRetry Policyを設定します。
+
+今回の最大Retry回数は3回です。
+
+Maximum Retry : 3
+Current Retry : 3
+Status        : FAILED
+
+Retry上限に達した場合、
+Workflow Engineは自動Retryを停止します。
+
+これは、AIが自動処理を続ける範囲を
+明確にするための仕組みです。
+
+3. Workflowを一時停止する
+
+Retry上限に達すると、
+Workflow全体を一時停止します。
+
+Task 01   COMPLETED
+Task 02   COMPLETED
+Task 03   COMPLETED
+Task 04   FAILED
+Task 05   PENDING
+Task 06   PENDING
+
+Workflow
+   ↓
+PAUSED
+
+Task 04が解決していない状態で
+後続Taskを実行しないようにします。
+
+4. AIがエラーを整理する
+
+Workflowが停止したあと、
+AI Coreがエラー情報を整理します。
+
+Task ID       : TSK-04
+Task          : 報告書作成
+担当          : AI社員B
+Status        : FAILED
+Error         : TIMEOUT
+Retry         : 3 / 3
+
+さらに、
+
+Knowledge Base
+Network
+Vector DB
+Search Query
+External Service
+
+などから、考えられる原因を整理します。
+
+AIはエラーの原因候補や
+対応方法を整理します。
+
+ただし、ここでAIが最終判断を行うのではありません。
+
+人間が判断できる状態を作ることが目的です。
+
+5. Human Intervention
+
+Retry上限に達した場合、
+人間による判断が必要になります。
+
+HUMAN INTERVENTION REQUIRED
+
+人間は状況に応じて、
+
+Retry
+Edit Task
+Stop Workflow
+
+などの対応を選択します。
+
+AIが自動処理できる範囲と、
+人間が判断する範囲を分けます。
+
+6. HiroがTaskを確認する
+
+HiroはTask 04について、
+
+Taskの内容
+担当AI社員
+エラー内容
+Retry回数
+実行履歴
+関連ログ
+考えられる原因
+
+を確認します。
+
+今回のケースでは、
+TIMEOUTが3回連続して発生しています。
+
+そこで原因を確認したうえで、
+次の対応を判断します。
+
+7. 人間の判断でWorkflowを再開する
+
+原因を確認して必要な修正を行ったあと、
+HiroがTask 04の再実行を選択します。
+
+FAILED
+   ↓
+Human Judgment
+   ↓
+Task修正
+   ↓
+PENDING
+   ↓
+RUNNING
+
+Workflow Engineは、
+人間の判断を受け取って
+停止していたWorkflowを再開します。
+
+AIが勝手に再開するのではなく、
+人間の判断をきっかけとして
+Workflowを再開します。
+
+8. AIと人間の役割分担
+
+DAY63で、AIと人間の役割を整理します。
+
+AIの役割
+エラー検知
+↓
+エラー分析
+↓
+自動Retry
+↓
+ログ整理
+↓
+原因候補の提示
+↓
+Workflow状態管理
+人間の役割
+例外の判断
+↓
+原因の確認
+↓
+Taskの修正判断
+↓
+Retry / Stopの判断
+↓
+Workflow再開の判断
+9. DAY63の考え方
+
+AIにすべてを任せるのではなく、
+
+AIに任せられることはAIに任せる。
+
+そして、
+
+人間が判断すべきことは人間が判断する。
+
+この役割分担をWorkflowの中に組み込みます。
+
+自動化では、
+
+「どこまで自動化するか」
+
+だけでなく、
+
+「どこで自動化を止めるか」
+
+も重要になります。
+
+10. DAY53〜DAY63
+DAY53
+Knowledge Base
+        ↓
+DAY54
+RAG Search
+        ↓
+DAY55
+RAG Answer
+        ↓
+DAY56
+AI Employee × RAG
+        ↓
+DAY57
+AI Agent
+        ↓
+DAY58
+Workflow
+        ↓
+DAY59
+複数AI社員の連携
+        ↓
+DAY60
+Workflow State
+        ↓
+DAY61
+Error Recovery
+        ↓
+DAY62
+Automatic Retry
+        ↓
+DAY63
+Human Intervention
+
+RAGから始まった仕組みが、
+
+「AIが会社の知識を使う」
+
+↓
+
+「AIが仕事を実行する」
+
+↓
+
+「Workflowで仕事を動かす」
+
+↓
+
+「エラーから自動復旧する」
+
+↓
+
+「必要な場面では人間に判断を戻す」
+
+というところまで進みました。
+
+11. Project Structure
+game/
+├── day63.rpy
+├── scene63_01.png
+├── scene63_02.png
+├── scene63_03.png
+├── scene63_04.png
+├── scene63_05.png
+├── scene63_06.png
+├── scene63_07.png
+└── scene63_08.png
+
+voice/
+└── day63/
+    ├── day63_01.ogg
+    ├── day63_02.ogg
+    ├── day63_03.ogg
+    ├── day63_04.ogg
+    ├── day63_05.ogg
+    ├── day63_06.ogg
+    ├── day63_07.ogg
+    └── day63_08.ogg
+DAY63 Summary
+
+DAY63では、Workflow Engineに
+
+Retry上限
+Workflow停止
+エラー情報整理
+Human Intervention
+人間によるWorkflow再開
+
+という考え方を追加しました。
+
+自動化を進めるだけではなく、
+
+自動化をどこで止め、人間に判断を戻すか。
+
+これもCompany AI OSにおける重要な設計です。
+
+Next Step
+
+次の段階では、
+
+Human-in-the-Loop
+通知
+承認
+Workflow再開
+AI社員へのTask割り当て
+Workflow監視
+
+などへ発展させることができます。
+
+Company AI OS
+
+A Better Workplace with AI
+
+DAY63
+AIと人間の役割分担
+
+____________________________________________________________________________________________________________________________________________________________
+
 ### Related
 
 ## 公開記録
@@ -4684,6 +5028,7 @@ ________________________________________________________________________________
 - DAY60　[YouTube](https://youtu.be/YgLrcXBit9k)｜[note](https://note.com/grand_peony7915/n/ne7986056a661)
 - DAY61　[YouTube](https://youtu.be/vz9tWX94Mkc)｜[note](https://note.com/grand_peony7915/n/nd12b07571cad)
 - DAY61　[YouTube](https://youtu.be/5Lju1rkmiVo)｜[note](https://note.com/grand_peony7915/n/n077e6490c91c)
+- DAY61　[YouTube](https://youtu.be/HxZoyIK8R90)｜[note](https://note.com/grand_peony7915/n/n6aec98ae754d)
 
 
 ## Author
