@@ -5000,6 +5000,312 @@ AIと人間の役割分担
 
 ____________________________________________________________________________________________________________________________________________________________
 
+# DAY64｜Human-in-the-Loop
+
+Company AI OS 開発100日チャレンジ DAY64。
+
+DAY63では、WorkflowのRetry上限を設定し、
+自動Retryだけでは解決できない場合に、
+人間へ判断を戻す「Human Intervention」を実装しました。
+
+DAY64では、さらに一歩進めて、
+Workflowの中に人間による承認ポイントを組み込みます。
+
+---
+
+## 🎯 DAY64のテーマ
+
+**Human-in-the-Loop**
+
+AIが仕事を進め、
+重要な場面では人間が確認・判断する。
+
+AIだけで仕事を完結させるのではなく、
+AIと人間の役割をWorkflowの中に組み込みます。
+
+---
+
+## 🔄 DAY64のWorkflow
+
+今回の基本的な流れです。
+
+```text
+AI Agent
+    ↓
+Workflow
+    ↓
+AI社員がTaskを実行
+    ↓
+結果を作成
+    ↓
+Human Approval
+    ↓
+    ┌───────────────┐
+    │               │
+  APPROVE         REJECT
+    │               │
+    ↓               ↓
+ 次のTask        修正・再実行
+    │
+    ↓
+Workflow継続
+01｜人間の承認が必要な仕事
+
+すべてのTaskをAIだけで完了させるのではなく、
+重要な仕事には人間による確認ポイントを設定します。
+
+今回の例では、
+経営向けの報告書作成Taskを対象にしました。
+
+Task 01｜市場調査
+Task 02｜データ分析
+Task 03｜資料作成
+Task 04｜報告書作成
+        ↓
+Human Approval
+        ↓
+Task 05｜最終確認
+Task 06｜レポート提出
+02｜AIが結果を作る
+
+AI社員はKnowledge Baseから必要な情報を検索し、
+データを分析して報告書を作成します。
+
+Knowledge Base
+      ↓
+RAG
+      ↓
+AI Core
+      ↓
+AI社員
+      ↓
+報告書
+
+AIは、情報検索・分析・資料作成などを担当します。
+
+03｜Approval Point
+
+AIが結果を作成した後、
+Workflowを一度停止します。
+
+AIが結果を作成
+      ↓
+HUMAN APPROVAL REQUIRED
+      ↓
+人間が確認
+
+人間が承認するまで、
+次のTaskには進みません。
+
+04｜Hiroが結果を確認する
+
+HiroはAIが作成した結果を確認します。
+
+確認する情報は、
+
+報告書
+Knowledge Baseから取得した情報
+AIの処理結果
+実行履歴
+関連資料
+
+などです。
+
+AIが結果を作ったことと、
+その結果を採用してよいことは別の問題です。
+
+そのため、重要な場面では人間が確認します。
+
+05｜承認する
+
+問題がなければ、人間が承認します。
+
+HUMAN APPROVAL REQUIRED
+          ↓
+       APPROVE
+          ↓
+       APPROVED
+          ↓
+      次のTask
+
+承認結果をWorkflow Engineが受け取り、
+次のTaskへ進みます。
+
+06｜Workflowが再開する
+
+承認されるとWorkflowが再開します。
+
+Task 01｜COMPLETED
+Task 02｜COMPLETED
+Task 03｜COMPLETED
+Task 04｜APPROVED
+Task 05｜IN PROGRESS
+Task 06｜PENDING
+
+人間がWorkflow全体を操作するのではなく、
+必要な場所だけ判断します。
+
+07｜承認しない場合
+
+AIが作った結果に問題がある場合は、
+人間が差し戻します。
+
+例えば、
+
+分析が不足している
+データに問題がある
+追加資料が必要
+内容を修正する必要がある
+
+といった場合です。
+
+Human Approval
+      ↓
+    REJECT
+      ↓
+Taskを修正
+      ↓
+再実行
+      ↓
+Human Approval
+
+RejectしてWorkflowを終了するのではなく、
+修正して再実行する流れを作ることができます。
+
+08｜AIと人間の共同Workflow
+
+DAY64で実現した考え方です。
+
+                 AI
+                  ↓
+          検索・分析・資料作成
+                  ↓
+                結果
+                  ↓
+        ┌────────────────┐
+        │ Human Approval │
+        └────────────────┘
+                  ↓
+          ┌───────┴───────┐
+          ↓               ↓
+       APPROVE           REJECT
+          ↓               ↓
+       次のTask        修正・再実行
+          │
+          ↓
+       Workflow
+
+AIが得意な仕事はAIが担当し、
+重要な判断は人間が担当します。
+
+Workflow Engineが、
+AIと人間の作業をつなぎます。
+
+DAY63 → DAY64
+DAY63
+Retry Limit
+     ↓
+Human Intervention
+
+        ↓
+
+DAY64
+Human Approval
+     ↓
+Human-in-the-Loop
+
+DAY63では、
+問題が発生した場合に人間へ判断を戻しました。
+
+DAY64では、
+問題が発生していなくても、
+重要なTaskに人間の承認ポイントを設定できるようにしました。
+
+DAY53〜DAY64
+DAY53  Knowledge Base
+   ↓
+DAY54  RAG Search
+   ↓
+DAY55  RAG Answer
+   ↓
+DAY56  AI Employee × RAG
+   ↓
+DAY57  AI Agent
+   ↓
+DAY58  Workflow
+   ↓
+DAY59  AI Employee Collaboration
+   ↓
+DAY60  Workflow State
+   ↓
+DAY61  Error Recovery
+   ↓
+DAY62  Automatic Retry
+   ↓
+DAY63  Retry Limit / Human Intervention
+   ↓
+DAY64  Human Approval / Human-in-the-Loop
+
+RAGで会社の知識を利用し、
+AI Agentで仕事を分解し、
+Workflowで仕事を実行する。
+
+そしてDAY64では、
+AIと人間が共同で仕事を進める仕組みへ進みました。
+
+🎯 DAY64のポイント
+
+DAY64で重要なのは、
+「AIにすべてを任せる」ことではありません。
+
+AIが仕事を進める。
+
+人間が重要な場面で確認・判断する。
+
+そしてWorkflow Engineが、
+AIと人間の作業をつなぐ。
+
+この役割分担をWorkflowそのものに組み込みました。
+
+🚀 Next Step
+
+DAY64ではHuman-in-the-LoopをWorkflowに組み込みました。
+
+次は、この仕組みをさらにCompany AI OSの
+業務実行へつなげていきます。
+
+100日でCompany AI OSを作る。
+
+DAY65へ続きます。
+
+
+### GitHubの構成
+
+```text
+DAY64/
+├── day64.rpy
+├── scene64_01.png
+├── scene64_02.png
+├── scene64_03.png
+├── scene64_04.png
+├── scene64_05.png
+├── scene64_06.png
+├── scene64_07.png
+├── scene64_08.png
+└── voice/
+    └── day64/
+        ├── day64_01.ogg
+        ├── day64_02.ogg
+        ├── day64_03.ogg
+        ├── day64_04.ogg
+        ├── day64_05.ogg
+        ├── day64_06.ogg
+        ├── day64_07.ogg
+        └── day64_08.ogg
+
+
+
+____________________________________________________________________________________________________________________________________________________________
 ### Related
 
 ## 公開記録
@@ -5027,8 +5333,9 @@ ________________________________________________________________________________
 - DAY59　[YouTube](https://youtu.be/6fvFa-UOxS0)｜[note](https://note.com/grand_peony7915/n/n3454b111812f)
 - DAY60　[YouTube](https://youtu.be/YgLrcXBit9k)｜[note](https://note.com/grand_peony7915/n/ne7986056a661)
 - DAY61　[YouTube](https://youtu.be/vz9tWX94Mkc)｜[note](https://note.com/grand_peony7915/n/nd12b07571cad)
-- DAY61　[YouTube](https://youtu.be/5Lju1rkmiVo)｜[note](https://note.com/grand_peony7915/n/n077e6490c91c)
-- DAY61　[YouTube](https://youtu.be/HxZoyIK8R90)｜[note](https://note.com/grand_peony7915/n/n6aec98ae754d)
+- DAY62　[YouTube](https://youtu.be/5Lju1rkmiVo)｜[note](https://note.com/grand_peony7915/n/n077e6490c91c)
+- DAY63　[YouTube](https://youtu.be/HxZoyIK8R90)｜[note](https://note.com/grand_peony7915/n/n6aec98ae754d)
+- DAY64　[YouTube](https://youtu.be/zZ5H6D7blsA)｜[note](https://note.com/grand_peony7915/n/n84c2b7d47cc1)
 
 
 ## Author
