@@ -5306,6 +5306,311 @@ DAY64/
 
 
 ____________________________________________________________________________________________________________________________________________________________
+
+# DAY65｜ApprovalがWorkflowを制御する
+
+Company AI OS 開発100日チャレンジ DAY65。
+
+DAY64では、Workflowの中に
+Human Approvalを組み込みました。
+
+DAY65では、そのApproval結果を
+Workflow Engineに反映します。
+
+人間の判断を単なる確認操作で終わらせず、
+Workflowの次の処理を制御する情報として利用します。
+
+---
+
+## 🎯 DAY65のテーマ
+
+**ApprovalがWorkflowを制御する**
+
+基本的な流れは、
+
+```text
+AI社員
+   ↓
+Task実行
+   ↓
+結果作成
+   ↓
+Human Approval
+   ↓
+┌───────────────┐
+│               │
+APPROVE        REJECT
+│               │
+↓               ↓
+Task完了       Workflow停止
+│               ↓
+↓            修正Task生成
+次のTask        ↓
+│            AI社員が修正
+↓               ↓
+Workflow     再びApproval
+継続
+
+です。
+
+01｜承認結果をWorkflowへ渡す
+
+DAY64では、人間がAIの結果を確認し、
+ApproveまたはRejectを選択できるようにしました。
+
+DAY65では、その結果をWorkflow Engineへ渡します。
+
+Human Approval
+      ↓
+Approval Result
+      ↓
+Workflow Engine
+02｜Workflowが承認結果を受け取る
+
+Hiroが承認すると、
+
+Task 04
+HUMAN APPROVAL
+      ↓
+APPROVED
+
+という結果がWorkflow Engineへ渡されます。
+
+Workflow Engineは、この結果をもとに
+Taskの状態を更新します。
+
+03｜承認されたTaskを完了にする
+
+承認されたTaskはWorkflow上でも完了になります。
+
+PENDING APPROVAL
+       ↓
+APPROVED
+       ↓
+COMPLETED
+
+これによってWorkflow Engineは、
+Task 04が完了したことを認識できます。
+
+04｜次のTaskを開始する
+
+Task 04が完了すると、
+Workflow Engineは次のTaskを開始します。
+
+Task 04
+COMPLETED
+     ↓
+Task 05
+PENDING
+     ↓
+RUNNING
+
+人間の承認をきっかけとして、
+Workflowが自動的に次のTaskへ進みます。
+
+05｜Rejectの場合
+
+人間が結果を承認できない場合は、
+REJECTを選択します。
+
+Human Approval
+      ↓
+    REJECT
+      ↓
+Workflow PAUSED
+
+Workflowは次のTaskへ進みません。
+
+06｜修正Taskを生成する
+
+Rejectされた場合、
+Workflowは必要な修正Taskを生成します。
+
+例えば、
+
+修正Task
+
+・競合分析を追加
+・最新の市場データを反映
+・グラフの根拠を明確化
+・結論部分を再構成
+
+などです。
+
+REJECT
+  ↓
+修正内容
+  ↓
+Correction Task
+  ↓
+AI社員
+
+AI社員が修正Taskを実行します。
+
+07｜修正後に再び承認する
+
+修正Taskが完了すると、
+再びHuman Approvalを行います。
+
+REJECT
+ ↓
+修正Task
+ ↓
+AI社員が修正
+ ↓
+修正版
+ ↓
+Human Approval
+
+問題がなければ、再びApproveします。
+
+これによって、
+
+Reject
+ ↓
+修正
+ ↓
+再承認
+
+というWorkflowのループが完成します。
+
+08｜ApprovalがWorkflowを制御する
+
+DAY65で完成した全体像です。
+
+                 AI社員
+                    ↓
+                 Task実行
+                    ↓
+                 結果作成
+                    ↓
+           ┌────────────────┐
+           │ Human Approval │
+           └────────────────┘
+                 ↓       ↓
+              APPROVE   REJECT
+                 ↓       ↓
+              Task完了  Workflow停止
+                 ↓       ↓
+              次のTask  修正Task生成
+                 ↓       ↓
+              Workflow  AI社員が修正
+                 ↓       ↓
+                 └──→ 再承認
+
+Human Approvalは単なる確認操作ではありません。
+
+人間の判断そのものが、Workflowの次の動きを決めます。
+
+DAY64 → DAY65
+DAY64
+Human Approval
+        ↓
+人間が承認・差し戻しを判断
+
+        ↓
+
+DAY65
+Approval Result
+        ↓
+Workflow Engine
+        ↓
+次のTask / 修正Task
+
+DAY64で「人間が承認できる仕組み」を作り、
+DAY65では「その判断によってWorkflowが動く仕組み」へ進みました。
+
+DAY53〜DAY65
+DAY53  Knowledge Base
+   ↓
+DAY54  RAG Search
+   ↓
+DAY55  RAG Answer
+   ↓
+DAY56  AI Employee × RAG
+   ↓
+DAY57  AI Agent
+   ↓
+DAY58  Workflow
+   ↓
+DAY59  AI Employee Collaboration
+   ↓
+DAY60  Workflow State
+   ↓
+DAY61  Error Recovery
+   ↓
+DAY62  Automatic Retry
+   ↓
+DAY63  Retry Limit / Human Intervention
+   ↓
+DAY64  Human Approval
+   ↓
+DAY65  Approval Result → Workflow
+🎯 DAY65のポイント
+
+DAY65では、
+
+AIが仕事を実行する
+
+↓
+
+人間が重要な場面で判断する
+
+↓
+
+Workflowがその判断を受け取る
+
+↓
+
+次のTaskまたは修正Taskへ進む
+
+という仕組みを作りました。
+
+AIと人間の役割をWorkflowの中に組み込むことで、
+AIだけでも、人間だけでもない
+共同作業の仕組みに近づいています。
+
+🚀 Next Step
+
+DAY64ではHuman Approvalを実装しました。
+
+DAY65ではApproval結果によって
+Workflowを制御できるようにしました。
+
+次は、この仕組みをさらに
+Company AI OSの業務実行へつなげていきます。
+
+100日でCompany AI OSを作る。
+
+DAY66へ続きます。
+
+
+### GitHubに追加するファイル
+
+```text
+DAY65/
+├── day65.rpy
+├── scene65_01.png
+├── scene65_02.png
+├── scene65_03.png
+├── scene65_04.png
+├── scene65_05.png
+├── scene65_06.png
+├── scene65_07.png
+├── scene65_08.png
+└── voice/
+    └── day65/
+        ├── day65_01.ogg
+        ├── day65_02.ogg
+        ├── day65_03.ogg
+        ├── day65_04.ogg
+        ├── day65_05.ogg
+        ├── day65_06.ogg
+        ├── day65_07.ogg
+        └── day65_08.ogg
+
+____________________________________________________________________________________________________________________________________________________________
+
 ### Related
 
 ## 公開記録
@@ -5336,7 +5641,7 @@ ________________________________________________________________________________
 - DAY62　[YouTube](https://youtu.be/5Lju1rkmiVo)｜[note](https://note.com/grand_peony7915/n/n077e6490c91c)
 - DAY63　[YouTube](https://youtu.be/HxZoyIK8R90)｜[note](https://note.com/grand_peony7915/n/n6aec98ae754d)
 - DAY64　[YouTube](https://youtu.be/zZ5H6D7blsA)｜[note](https://note.com/grand_peony7915/n/n84c2b7d47cc1)
-
+- DAY65　[YouTube](https://youtu.be/zZ5H6D7blsA)｜[note](https://note.com/grand_peony7915/n/n3163d076b124)
 
 ## Author
 
