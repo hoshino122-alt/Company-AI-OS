@@ -5611,6 +5611,393 @@ DAY65/
 
 ____________________________________________________________________________________________________________________________________________________________
 
+# DAY66｜Workflowが実際の仕事を動かす
+
+Company AI OSを100日で作るプロジェクト DAY66。
+
+DAY65では、Human Approvalの結果をWorkflowへ反映し、
+人間の判断によって次のTaskを制御できるようにしました。
+
+DAY66では、その承認されたTaskを、
+実際の業務としてAI社員に実行させるところまで進めます。
+
+---
+
+## 1. DAY66のテーマ
+
+**Workflowが実際の仕事を動かす**
+
+これまでのWorkflowは、Taskの状態や実行順序を
+管理することが中心でした。
+
+DAY66では、Workflow EngineからAI社員へTaskを渡し、
+AI社員が実際の業務を実行します。
+
+その結果をWorkflowへ戻し、
+結果を確認したうえで次のTaskを自動的に開始します。
+
+---
+
+## 2. DAY66のWorkflow
+
+基本的な流れは次のようになります。
+
+```text
+Human Approval
+       ↓
+    APPROVED
+       ↓
+Workflow Engine
+       ↓
+実行Taskを決定
+       ↓
+AI社員へTaskを渡す
+       ↓
+AI社員が業務を実行
+       ↓
+業務結果をWorkflowへ返す
+       ↓
+Workflowが結果を確認
+       ↓
+次のTaskを自動実行
+3. 承認されたTaskを実行する
+
+DAY65でHuman ApprovalがAPPROVEDになると、
+Workflowは次の処理へ進みます。
+
+Human Approval
+       ↓
+    APPROVED
+       ↓
+Workflow Engine
+       ↓
+実行開始
+
+承認されたTaskを、
+実際の業務として実行する段階へ進みます。
+
+4. Workflowが実行Taskを決定する
+
+Workflow Engineは現在のTask状態を確認し、
+次に実行できるTaskを決定します。
+
+例えば、
+
+Task 01  COMPLETED
+Task 02  COMPLETED
+Task 03  COMPLETED
+Task 04  APPROVED
+Task 05  READY
+Task 06  PENDING
+
+という状態であれば、
+Task 05を次の実行Taskとして選択します。
+
+5. AI社員へTaskを渡す
+
+Workflow Engineが決定したTaskを
+担当するAI社員へ渡します。
+
+Taskだけではなく、必要な情報も一緒に渡します。
+
+Workflow Engine
+       ↓
+Task
+       ↓
+入力データ
+参照Knowledge Base
+実行条件
+完了条件
+出力形式
+       ↓
+AI社員
+
+これにより、AI社員は
+Workflowから与えられた仕事を実行できます。
+
+6. AI社員が業務を実行する
+
+AI社員はTaskを受け取ると、
+必要な情報を取得して業務を実行します。
+
+例えば、
+
+Knowledge Baseを検索
+       ↓
+必要な資料を取得
+       ↓
+データを分析
+       ↓
+資料を作成
+       ↓
+結果を整理
+
+DAY53以降で構築してきたKnowledge BaseやRAGを、
+AI社員の実際の業務に利用します。
+
+7. 業務結果をWorkflowへ返す
+
+AI社員が業務を完了すると、
+実行結果をWorkflow Engineへ返します。
+
+AI社員
+   ↓
+実行結果
+   ↓
+Workflow Engine
+
+Workflow Engineは結果を受け取り、
+Taskの状態を更新します。
+
+例えば、
+
+Task 05
+STATUS: SUCCESS
+
+OUTPUT:
+final_report.md
+
+のような結果をWorkflowへ返します。
+
+8. Workflowが結果を確認する
+
+Workflow Engineは、
+AI社員から返された結果を確認します。
+
+確認する内容の例：
+
+Taskが正常終了したか
+エラーが発生していないか
+出力ファイルが存在するか
+必要な条件を満たしているか
+
+正常終了の場合：
+
+SUCCESS
+   ↓
+次のTask
+
+問題が発生した場合：
+
+ERROR
+   ↓
+Error Recovery
+   ↓
+Human Intervention
+
+という流れにつなげます。
+
+9. 次のTaskを自動実行する
+
+Task 05が正常に完了すると、
+Workflow Engineは次のTaskを開始します。
+
+Task 05
+COMPLETED
+    ↓
+Task 06
+RUNNING
+
+ここでは、人間が毎回Taskを開始する必要はありません。
+
+Workflow EngineがTaskの状態を確認しながら、
+次の処理を進めます。
+
+10. Workflowが実際の仕事を動かす
+
+DAY66では、Workflowの役割が一段階広がりました。
+
+Workflowは単にTaskの順番を管理するだけではありません。
+
+承認されたTask
+       ↓
+実行Taskを決定
+       ↓
+AI社員へTaskを渡す
+       ↓
+AI社員が業務を実行
+       ↓
+結果をWorkflowへ返す
+       ↓
+結果を確認
+       ↓
+次のTaskを実行
+
+この流れによって、
+Workflowが実際の仕事を動かす仕組みになります。
+
+11. DAY53〜DAY66の流れ
+
+DAY53から構築してきた仕組みをつなげると、
+次のようになります。
+
+Knowledge Base
+      ↓
+RAG
+      ↓
+AI社員
+      ↓
+AI Agent
+      ↓
+Task分解
+      ↓
+Execution Plan
+      ↓
+Workflow Engine
+      ↓
+AI社員へTask
+      ↓
+業務実行
+      ↓
+結果
+      ↓
+Workflow
+      ↓
+次のTask
+
+さらに重要な処理では、
+
+Human Approval
+       ↓
+Approve / Reject
+       ↓
+Workflow
+
+という人間の判断も組み込まれています。
+
+12. DAY66で実現したこと
+
+DAY57ではAI Agentが仕事を分解し、
+実行計画を作りました。
+
+DAY58ではWorkflowが、
+その計画に沿ってTaskを実行しました。
+
+DAY59では複数のAI社員を
+Workflowで連携しました。
+
+DAY60〜DAY62では、
+Workflowの状態管理と自動Retryを追加しました。
+
+DAY63ではRetry上限と
+Human Interventionを追加しました。
+
+DAY64〜DAY65では、
+Human ApprovalをWorkflowに組み込みました。
+
+そしてDAY66では、
+
+WorkflowからAI社員へ実際の仕事を渡し、
+その結果を受け取って次のTaskを動かす
+
+ところまでつながりました。
+
+13. DAY66の位置づけ
+
+Company AI OSは、
+
+AI社員
+   +
+Knowledge Base
+   +
+RAG
+   +
+AI Agent
+   +
+Workflow
+   +
+Human-in-the-Loop
+
+を組み合わせながら、
+AIが実際の会社業務を進められる仕組みへ発展しています。
+
+DAY66では、その中でも
+
+Workflow → AI社員 → 結果 → Workflow
+
+という実行ループを構築しました。
+
+14. 次のステップ
+
+DAY66で、Workflowによる業務実行の
+基本的な流れができました。
+
+次は、この仕組みをさらに実際の会社業務へ
+広げていきます。
+
+仕事の依頼
+    ↓
+Task
+    ↓
+実行
+    ↓
+結果
+    ↓
+次の処理
+
+Company AI OSの中で、
+この一連の業務を扱えるようにしていきます。
+
+Project Structure
+DAY66/
+├── day66.rpy
+├── scene66_01.png
+├── scene66_02.png
+├── scene66_03.png
+├── scene66_04.png
+├── scene66_05.png
+├── scene66_06.png
+├── scene66_07.png
+├── scene66_08.png
+└── voice/
+    └── day66/
+        ├── day66_01.ogg
+        ├── day66_02.ogg
+        ├── day66_03.ogg
+        ├── day66_04.ogg
+        ├── day66_05.ogg
+        ├── day66_06.ogg
+        ├── day66_07.ogg
+        └── day66_08.ogg
+DAY66 Summary
+
+WorkflowがAI社員へ仕事を渡し、
+実際の業務を実行し、
+結果を受け取って次のTaskを動かす。
+
+これがDAY66のポイントです。
+
+DAY53〜DAY66
+DAY53  Knowledge Base
+   ↓
+DAY54  RAG Search
+   ↓
+DAY55  RAG Answer
+   ↓
+DAY56  AI Employee × RAG
+   ↓
+DAY57  AI Agent
+   ↓
+DAY58  Workflow
+   ↓
+DAY59  AI Employee Collaboration
+   ↓
+DAY60  Workflow State
+   ↓
+DAY61  Error Recovery
+   ↓
+DAY62  Automatic Retry
+   ↓
+DAY63  Human Intervention
+   ↓
+DAY64  Human Approval
+   ↓
+DAY65  Approval Result
+   ↓
+DAY66  Workflow Execution
+
+____________________________________________________________________________________________________________________________________________________________
+
 ### Related
 
 ## 公開記録
@@ -5642,6 +6029,7 @@ ________________________________________________________________________________
 - DAY63　[YouTube](https://youtu.be/HxZoyIK8R90)｜[note](https://note.com/grand_peony7915/n/n6aec98ae754d)
 - DAY64　[YouTube](https://youtu.be/zZ5H6D7blsA)｜[note](https://note.com/grand_peony7915/n/n84c2b7d47cc1)
 - DAY65　[YouTube](https://youtu.be/zZ5H6D7blsA)｜[note](https://note.com/grand_peony7915/n/n3163d076b124)
+- DAY65　[YouTube](https://youtu.be/TV0mDxDTFWQ)｜[note](https://note.com/grand_peony7915/n/n7b5fb244a160)
 
 ## Author
 
