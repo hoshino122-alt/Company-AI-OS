@@ -6029,7 +6029,7 @@ ________________________________________________________________________________
 - DAY63　[YouTube](https://youtu.be/HxZoyIK8R90)｜[note](https://note.com/grand_peony7915/n/n6aec98ae754d)
 - DAY64　[YouTube](https://youtu.be/zZ5H6D7blsA)｜[note](https://note.com/grand_peony7915/n/n84c2b7d47cc1)
 - DAY65　[YouTube](https://youtu.be/zZ5H6D7blsA)｜[note](https://note.com/grand_peony7915/n/n3163d076b124)
-- DAY65　[YouTube](https://youtu.be/TV0mDxDTFWQ)｜[note](https://note.com/grand_peony7915/n/n7b5fb244a160)
+- DAY66　[YouTube](https://youtu.be/TV0mDxDTFWQ)｜[note](https://note.com/grand_peony7915/n/n7b5fb244a160)
 
 ## Author
 
