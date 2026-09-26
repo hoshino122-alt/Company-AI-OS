@@ -5998,6 +5998,415 @@ DAY66  Workflow Execution
 
 ____________________________________________________________________________________________________________________________________________________________
 
+# DAY67｜AI社員が結果をつないで仕事を完成させる
+
+Company AI OSを100日で作るプロジェクト DAY67。
+
+DAY66では、WorkflowからAI社員へTaskを渡し、
+実際の業務を実行できるようにしました。
+
+DAY67では、その次の段階として、
+**前のTaskの結果を次のTaskへ引き継ぐ仕組み**
+を構築します。
+
+---
+
+## 1. DAY67のテーマ
+
+**AI社員が結果をつないで仕事を完成させる**
+
+会社の仕事は、一つのTaskだけで終わるとは限りません。
+
+```text
+Task
+ ↓
+AI社員
+ ↓
+Result
+ ↓
+Next Task
+ ↓
+AI社員
+ ↓
+Result
+ ↓
+Final Result
+
+前のTaskで作られた結果を、
+次のTaskの入力として利用します。
+
+これによって、複数のTaskを一つの業務フローとして
+つなげることができます。
+
+2. DAY66からDAY67へ
+
+DAY66では、
+
+Workflow
+   ↓
+AI社員
+   ↓
+業務実行
+   ↓
+Result
+
+という流れを作りました。
+
+DAY67では、さらにその結果を次のTaskへ渡します。
+
+Workflow
+   ↓
+AI社員A
+   ↓
+Result
+   ↓
+Next Task
+   ↓
+AI社員B
+   ↓
+Result
+   ↓
+Final Result
+3. 前のTaskが完了する
+
+まず、前のTaskが正常に完了します。
+
+Task 04｜報告書作成
+STATUS: COMPLETED
+
+OUTPUT:
+・report.pdf
+・analysis_data.csv
+・summary.md
+
+AI社員が業務を実行し、
+報告書や分析データなどの成果物を作成します。
+
+4. Workflowが実行結果を受け取る
+
+AI社員が業務を完了すると、
+実行結果がWorkflow Engineへ返されます。
+
+AI社員
+   ↓
+実行結果
+   ↓
+Workflow Engine
+
+Workflow Engineは、
+
+結果を受け取る
+ファイルを確認する
+内容を確認する
+Taskの状態を更新する
+次のTaskを準備する
+
+といった処理を行います。
+
+5. 結果を次のTaskへ渡す
+
+DAY67の重要なポイントです。
+
+Task 04の結果を、
+Task 05の入力として渡します。
+
+Task 04
+報告書作成
+   ↓
+実行結果
+   ↓
+Task 05
+最終確認
+
+例えば、
+
+report.pdf
+analysis_data.csv
+summary.md
+
+などがTask 05で利用されます。
+
+6. 次のAI社員が結果を受け取る
+
+Task 05を担当するAI社員が、
+前のTaskの結果を受け取ります。
+
+Task 04の結果
+       ↓
+Workflow Engine
+       ↓
+Task 05
+       ↓
+AI社員B
+
+ここで重要なのは、
+AI社員同士が直接通信するわけではないことです。
+
+Workflow Engineが間に入り、
+TaskとResultを管理します。
+
+7. 前の結果を使って業務を実行する
+
+AI社員Bは、受け取った結果を利用して
+Task 05を実行します。
+
+例えば、
+
+受け取った結果
+      ↓
+入力データを確認
+      ↓
+内容を分析
+      ↓
+報告書をチェック
+      ↓
+最終確認
+
+という処理を行います。
+
+前のTaskの結果が、
+次のTaskを実行するための入力になります。
+
+8. 新しい結果をWorkflowへ返す
+
+Task 05の処理が完了すると、
+AI社員Bは新しい結果をWorkflow Engineへ返します。
+
+AI社員B
+   ↓
+新しい実行結果
+   ↓
+Workflow Engine
+
+Workflow Engineは結果を受け取り、
+Task 05の状態を更新します。
+
+そして、さらに次のTaskへ進む準備をします。
+
+9. 結果がTaskからTaskへ引き継がれる
+
+Taskを連続させることで、
+結果が次の仕事へ引き継がれていきます。
+
+Task 01
+データ収集
+   ↓
+Result
+   ↓
+Task 02
+データ分析
+   ↓
+Result
+   ↓
+Task 03
+レポート作成
+   ↓
+Final Result
+
+それぞれのTaskが独立して動くのではなく、
+前のTaskの結果を使って次のTaskが動きます。
+
+10. AI社員が結果をつないで仕事を完成させる
+
+最終的には、
+
+Task 01
+   ↓
+AI社員A
+   ↓
+Result
+   ↓
+Task 02
+   ↓
+AI社員B
+   ↓
+Result
+   ↓
+Task 03
+   ↓
+AI社員C
+   ↓
+Final Result
+
+という流れになります。
+
+例えば、
+
+AI社員A：データを収集
+AI社員B：データを分析
+AI社員C：レポートを作成
+
+というように役割を分担できます。
+
+それぞれのAI社員が作った結果を次のTaskへ渡すことで、
+最終的に一つの成果物を完成させます。
+
+11. DAY67のポイント
+
+DAY67では、
+
+AI社員が単独で仕事をする
+
+ところから、
+
+前の仕事の結果を使って次の仕事をする
+
+ところへ進みました。
+
+仕事A
+ ↓
+結果A
+ ↓
+仕事B
+ ↓
+結果B
+ ↓
+仕事C
+ ↓
+最終成果物
+
+この「結果の連鎖」によって、
+複数のTaskを一つの業務フローとして扱えるようになります。
+
+12. Workflow Engineの役割
+
+DAY67ではWorkflow Engineが
+Task間の結果をつなぐ役割を担います。
+
+AI社員A
+   ↓
+Result
+   ↓
+Workflow Engine
+   ↓
+Next Task
+   ↓
+AI社員B
+   ↓
+Result
+   ↓
+Workflow Engine
+
+AI社員同士を直接接続するのではなく、
+Workflow Engineを中心にして業務をつなぎます。
+
+13. DAY53〜DAY67
+
+これまで構築してきた仕組みは、
+次のようにつながっています。
+
+DAY53  Knowledge Base
+   ↓
+DAY54  RAG Search
+   ↓
+DAY55  RAG Answer
+   ↓
+DAY56  AI Employee × RAG
+   ↓
+DAY57  AI Agent
+   ↓
+DAY58  Workflow
+   ↓
+DAY59  AI Employee Collaboration
+   ↓
+DAY60  Workflow State
+   ↓
+DAY61  Error Recovery
+   ↓
+DAY62  Automatic Retry
+   ↓
+DAY63  Human Intervention
+   ↓
+DAY64  Human Approval
+   ↓
+DAY65  Approval Result
+   ↓
+DAY66  Workflow Execution
+   ↓
+DAY67  Result Handoff
+
+DAY67では、
+Taskの結果を次のTaskへ引き継ぐ
+仕組みを追加しました。
+
+14. DAY67の位置づけ
+
+Company AI OSでは、
+
+Knowledge
+    ↓
+AI
+    ↓
+Task
+    ↓
+Workflow
+    ↓
+Execution
+    ↓
+Result
+    ↓
+Next Task
+
+という業務の流れが、
+少しずつ具体的になってきています。
+
+DAY67では、
+Workflowによって結果を次のTaskへ渡し、
+仕事を連続して実行できる形へ進めました。
+
+15. Project Structure
+DAY67/
+├── day67.rpy
+├── scene67_01.png
+├── scene67_02.png
+├── scene67_03.png
+├── scene67_04.png
+├── scene67_05.png
+├── scene67_06.png
+├── scene67_07.png
+├── scene67_08.png
+└── voice/
+    └── day67/
+        ├── day67_01.ogg
+        ├── day67_02.ogg
+        ├── day67_03.ogg
+        ├── day67_04.ogg
+        ├── day67_05.ogg
+        ├── day67_06.ogg
+        ├── day67_07.ogg
+        └── day67_08.ogg
+16. Extended description
+Company AI OS
+
+100日でCompany AI OSを作るプロジェクト。
+
+DAY67では、前のTaskで作られた結果を次のTaskへ引き継ぎ、
+AI社員が結果を利用しながら一つの仕事を完成させる流れを構築しました。
+
+Workflow Engineを中心に、
+
+AI社員
+ ↓
+Result
+ ↓
+Next Task
+ ↓
+AI社員
+ ↓
+Result
+ ↓
+Final Result
+
+という業務の連鎖を作ります。
+
+DAY67では、
+
+AI社員が結果をつないで仕事を完成させる
+
+ところまで進みました。
+
+____________________________________________________________________________________________________________________________________________________________
+
 ### Related
 
 ## 公開記録
@@ -6030,6 +6439,7 @@ ________________________________________________________________________________
 - DAY64　[YouTube](https://youtu.be/zZ5H6D7blsA)｜[note](https://note.com/grand_peony7915/n/n84c2b7d47cc1)
 - DAY65　[YouTube](https://youtu.be/zZ5H6D7blsA)｜[note](https://note.com/grand_peony7915/n/n3163d076b124)
 - DAY66　[YouTube](https://youtu.be/TV0mDxDTFWQ)｜[note](https://note.com/grand_peony7915/n/n7b5fb244a160)
+- DAY67　[YouTube](https://youtu.be/cuSB11hP32k)｜[note](https://note.com/grand_peony7915/n/n66bd47f0da6f)
 
 ## Author
 
