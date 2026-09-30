@@ -7124,6 +7124,277 @@ DAY71へ続きます。
 
 ____________________________________________________________________________________________________________________________________________________________
 
+# DAY71｜WorkflowがAI社員の仕事を管理する
+
+Company AI OSを100日で作るプロジェクト。
+
+DAY70では、作成されたTaskを担当するAI社員を決定し、
+WorkflowからAI社員へ仕事を渡すところまで進めました。
+
+DAY71では、その先に進みます。
+
+AI社員がTaskを開始した後、
+Workflow Engineが仕事の進捗を確認し、
+Taskの状態を更新していく仕組みを構築しました。
+
+## DAY71のテーマ
+
+**WorkflowがAI社員の仕事を管理する**
+
+---
+
+## DAY71の流れ
+
+```text
+AI社員がTaskを開始
+ ↓
+WorkflowがTaskの進行を確認
+ ↓
+AI社員が作業を進める
+ ↓
+Taskの進捗をWorkflowへ返す
+ ↓
+Workflowが進捗を更新
+ ↓
+作業中のTaskを確認
+ ↓
+完了したTaskを次へ進める
+ ↓
+WorkflowがAI社員の仕事を管理
+01｜AI社員がTaskを開始する
+
+DAY70で担当AI社員へのTaskの割り当てが完了しました。
+
+DAY71では、AI社員が実際にTaskを受け取り、
+担当する仕事を開始します。
+
+Workflow
+ ↓
+Task
+ ↓
+担当AI社員
+ ↓
+Task開始
+02｜WorkflowがTaskの進行を確認する
+
+AI社員が作業を開始すると、
+Workflow EngineがTaskの進行状況を確認します。
+
+例えば、
+
+Task 01｜市場調査
+進捗：70%
+
+Task 02｜企画書作成
+進捗：45%
+
+Task 03｜マーケティング計画
+進捗：30%
+
+Task 04｜開発スケジュール
+進捗：0%
+
+のように、各Taskの状態を管理します。
+
+03｜AI社員が作業を進める
+
+それぞれのAI社員が担当するTaskを実行します。
+
+調査担当AI社員
+→ 市場調査
+
+企画担当AI社員
+→ 企画書作成
+
+マーケティング担当AI社員
+→ マーケティング計画
+
+開発担当AI社員
+→ 開発スケジュール
+
+AI社員ごとに異なるTaskを進めることができます。
+
+04｜Taskの進捗をWorkflowへ返す
+
+AI社員は作業の進捗状況をWorkflowへ返します。
+
+AI社員
+ ↓
+作業
+ ↓
+進捗情報
+ ↓
+Workflow Engine
+
+例えば、
+
+市場調査
+70%
+ ↓
+90%
+
+のように、現在の進捗を報告します。
+
+05｜Workflowが進捗を更新する
+
+Workflow EngineはAI社員から受け取った進捗情報をもとに、
+Taskの状態を更新します。
+
+Task
+├── 担当AI社員
+├── 進捗率
+├── ステータス
+└── 更新時刻
+
+これによって、Workflow上のTaskを
+最新の状態に保つことができます。
+
+06｜作業中のTaskを確認する
+
+Workflowの画面から、
+現在作業中のTaskを確認できます。
+
+Task 01｜市場調査
+担当：調査担当AI社員
+進捗：70%
+状態：作業中
+
+Task 02｜企画書作成
+担当：企画担当AI社員
+進捗：45%
+状態：作業中
+
+Task 03｜マーケティング計画
+担当：マーケティング担当AI社員
+進捗：30%
+状態：作業中
+
+AI社員が現在何をしているのか、
+どこまで進んでいるのかを確認できます。
+
+07｜完了したTaskを次へ進める
+
+Taskが完了すると、
+AI社員からWorkflowへ結果が返されます。
+
+Task完了
+ ↓
+Workflowが確認
+ ↓
+次の工程を決定
+ ↓
+次のTaskへ
+
+これによって、完了したTaskを
+次の工程へつなげることができます。
+
+08｜WorkflowがAI社員の仕事を管理する
+
+DAY71では、AI社員へTaskを渡すだけではなく、
+
+Task
+ ↓
+担当AI社員
+ ↓
+Task開始
+ ↓
+作業
+ ↓
+進捗報告
+ ↓
+Workflowが状態更新
+ ↓
+Task完了
+ ↓
+次の工程
+
+という一連の流れをWorkflow Engineで管理します。
+
+DAY70とのつながり
+
+DAY70では、
+
+TaskをAI社員へ割り当てる
+
+ところまで進みました。
+
+DAY71では、
+
+AI社員の仕事の進行をWorkflowで管理する
+
+ところまで進めました。
+
+DAY70
+Task
+ ↓
+担当AI社員を決定
+ ↓
+AI社員へTaskを渡す
+
+DAY71
+ ↓
+AI社員がTask開始
+ ↓
+作業
+ ↓
+進捗をWorkflowへ返す
+ ↓
+Workflowが状態更新
+ ↓
+完了Taskを次へ進める
+DAY71のポイント
+
+DAY71のポイントは、
+
+「AI社員に仕事を任せる」だけではなく、
+「任せた仕事をWorkflowが管理する」
+
+ことです。
+
+AI社員が増えるほど、
+
+誰が仕事をしているのか
+何をしているのか
+どこまで進んでいるのか
+何が完了したのか
+次に何をするのか
+
+を管理する必要があります。
+
+Workflow Engineがその仕事の流れを管理することで、
+複数のAI社員による業務を一つのWorkflowとして扱えるようになります。
+
+DAY71では、Company AI OSを
+「AI社員へ仕事を渡す仕組み」から、
+「AI社員の仕事全体を管理する仕組み」
+へ進めました。
+
+DAY72へ続きます。
+
+Project Structure
+DAY71/
+├── day71.rpy
+├── scene71_01.png
+├── scene71_02.png
+├── scene71_03.png
+├── scene71_04.png
+├── scene71_05.png
+├── scene71_06.png
+├── scene71_07.png
+├── scene71_08.png
+└── voice/
+    └── day71/
+        ├── day71_01.ogg
+        ├── day71_02.ogg
+        ├── day71_03.ogg
+        ├── day71_04.ogg
+        ├── day71_05.ogg
+        ├── day71_06.ogg
+        ├── day71_07.ogg
+        └── day71_08.ogg
+
+____________________________________________________________________________________________________________________________________________________________
+
 
 ### Related
 
@@ -7161,6 +7432,7 @@ ________________________________________________________________________________
 - DAY68　[YouTube](https://youtu.be/PGbq7V2bAb8)｜[note](https://note.com/grand_peony7915/n/n7b240f55047e)
 - DAY69　[YouTube](https://youtu.be/Nh3-4XdUzBU)｜[note](https://note.com/grand_peony7915/n/n0b7e13da7f05)
 - DAY70　[YouTube](https://youtu.be/Nh3-4XdUzBU)｜[note](https://note.com/grand_peony7915/n/nd4885ca5a712)
+- DAY71　[YouTube](https://youtu.be/tvsvTOYvK9Y)｜[note](https://note.com/grand_peony7915/n/nfdb673f9ed21)
 
 
 ## Author
