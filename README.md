@@ -7395,6 +7395,167 @@ DAY71/
 
 ____________________________________________________________________________________________________________________________________________________________
 
+# DAY72｜Taskの結果をWorkflowで管理する
+
+Company AI OS 開発 DAY72。
+
+DAY71では、WorkflowによってAI社員のTaskの進捗を管理しました。
+
+DAY72では、その次の段階として、
+Taskが完了した後の「結果」をWorkflowで管理する仕組みを整理しました。
+
+## 今回のテーマ
+
+**Taskの結果をWorkflowで管理する**
+
+AI社員がTaskを完了すると、
+その成果物をWorkflowへ返します。
+
+WorkflowはTaskの完了を確認し、
+結果を保存します。
+
+そして、その結果を次のTaskへ引き渡します。
+
+```text
+AI社員がTaskを完了
+        ↓
+結果をWorkflowへ返す
+        ↓
+WorkflowがTaskの完了を確認
+        ↓
+Workflowが結果を保存
+        ↓
+次のTaskへ結果を渡す
+        ↓
+次のAI社員が結果を利用
+DAY72のポイント
+
+今回重要なのは、
+AI社員同士が直接結果を受け渡すのではなく、
+
+Workflowが結果の受け渡しを管理する
+
+という考え方です。
+
+例えば、
+
+Task 01
+市場調査
+   ↓
+市場調査レポート
+   ↓
+Task 02
+企画書作成
+   ↓
+企画書
+   ↓
+Task 03
+マーケティング計画
+
+というように、
+一つのTaskで作られた成果物を
+次のTaskへ引き継ぐことができます。
+
+Taskの状態と結果
+
+DAY71ではTaskの進捗を管理しました。
+
+Pending
+   ↓
+Running
+   ↓
+Completed
+
+DAY72ではCompletedになったTaskについて、
+
+Task ID
+担当AI社員
+Status
+成果物
+実行結果
+
+などをWorkflowで管理する考え方を整理しました。
+
+Company AI OSでのWorkflow
+
+Workflowは単にTaskを管理するだけではありません。
+
+AI社員が作った成果を保存し、
+次のTaskへ引き渡すことで、
+
+AI社員
+  ↓
+Task
+  ↓
+仕事
+  ↓
+結果
+  ↓
+Workflow
+  ↓
+次のTask
+  ↓
+次のAI社員
+
+という仕事の流れを作ります。
+
+これによって、
+複数のAI社員がそれぞれ担当する仕事を、
+一つの業務フローとしてつなげていきます。
+
+DAY72で整理した8つのシーン
+AI社員がTaskを完了する
+AI社員が結果をWorkflowへ返す
+WorkflowがTaskの完了を確認する
+Workflowが結果を保存する
+次のTaskが結果を受け取る
+次のAI社員が結果を利用する
+Taskの結果がWorkflowを流れる
+Workflowが仕事の結果をつなぐ
+開発記録
+
+DAY71では「Taskの進捗」を管理しました。
+
+DAY72では「Taskの結果」を管理します。
+
+Company AI OSを、
+AI社員が個別に仕事をする仕組みから、
+複数のAI社員が成果を引き継ぎながら仕事を進める仕組みへ、
+少しずつ発展させています。
+
+DAY72｜Taskの結果をWorkflowで管理する
+
+#CompanyAIOS #AI社員 #AIエージェント #Workflow #生成AI
+
+
+### GitHubのファイル構成
+
+DAY72では、これまでの流れに合わせて、
+
+```text
+day72/
+├── day72.rpy
+├── scene72_01.png
+├── scene72_02.png
+├── scene72_03.png
+├── scene72_04.png
+├── scene72_05.png
+├── scene72_06.png
+├── scene72_07.png
+├── scene72_08.png
+└── voice/
+    └── day72/
+        ├── day72_01.ogg
+        ├── day72_02.ogg
+        ├── day72_03.ogg
+        ├── day72_04.ogg
+        ├── day72_05.ogg
+        ├── day72_06.ogg
+        ├── day72_07.ogg
+        └── day72_08.ogg
+
+
+____________________________________________________________________________________________________________________________________________________________
 
 ### Related
 
@@ -7433,7 +7594,7 @@ ________________________________________________________________________________
 - DAY69　[YouTube](https://youtu.be/Nh3-4XdUzBU)｜[note](https://note.com/grand_peony7915/n/n0b7e13da7f05)
 - DAY70　[YouTube](https://youtu.be/Nh3-4XdUzBU)｜[note](https://note.com/grand_peony7915/n/nd4885ca5a712)
 - DAY71　[YouTube](https://youtu.be/tvsvTOYvK9Y)｜[note](https://note.com/grand_peony7915/n/nfdb673f9ed21)
-
+- DAY72　[YouTube](https://youtu.be/ToX7UDXf2MQ)｜[note](https://note.com/grand_peony7915/n/n83a78f2866d7)
 
 ## Author
 
