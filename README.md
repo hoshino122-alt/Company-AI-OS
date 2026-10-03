@@ -7557,6 +7557,220 @@ day72/
 
 ____________________________________________________________________________________________________________________________________________________________
 
+# DAY73｜Workflowが次のTaskを開始する
+
+Company AI OS 開発 DAY73。
+
+DAY72では、Taskが完了したあと、
+その結果をWorkflowで管理し、次のTaskへ引き渡す仕組みを整理しました。
+
+DAY73では、その結果を利用して、
+Workflowが実際に次のTaskを開始する流れを整理します。
+
+## 今回のテーマ
+
+**Workflowが次のTaskを開始する**
+
+基本的な流れは次の通りです。
+
+```text
+前のTaskが完了
+      ↓
+Workflowが結果を確認
+      ↓
+次のTaskの条件を確認
+      ↓
+Workflowが次のTaskを開始
+      ↓
+担当AI社員へTaskを渡す
+      ↓
+前のTaskの結果を受け取る
+      ↓
+AI社員が次の仕事を開始
+      ↓
+Workflowが連続して仕事を動かす
+1. 前のTaskが完了する
+
+例えば、AI社員が市場調査を担当します。
+
+Task 01
+市場調査
+    ↓
+市場調査レポート完成
+    ↓
+Completed
+
+Taskが完了すると、
+Workflowは次の処理へ進みます。
+
+2. Workflowが結果を確認する
+
+Workflowは、完了したTaskの状態と、
+Taskによって作られた成果物を確認します。
+
+Task Status
+Completed
+
+Result
+市場調査レポート
+
+次のTaskを開始するために必要な結果が
+揃っていることを確認します。
+
+3. 次のTaskの条件を確認する
+
+例えば、
+
+Task 01
+市場調査
+    ↓
+市場調査レポート
+    ↓
+Task 02
+企画書作成
+
+という関係があります。
+
+Task 02を開始するには、
+Task 01の結果が必要です。
+
+WorkflowがTask同士の関係と条件を確認します。
+
+4. Workflowが次のTaskを開始する
+
+条件が揃うと、
+Workflowは次のTaskを開始します。
+
+Task 01
+Completed
+    ↓
+Workflow
+    ↓
+Task 02
+Running
+
+これによって、
+前の仕事が終わると次の仕事へ進むことができます。
+
+5. 担当AI社員へTaskを渡す
+
+開始されたTaskは、
+担当するAI社員へ渡されます。
+
+Task 02
+企画書作成
+      ↓
+企画担当AI
+
+WorkflowがTaskと担当AI社員を管理します。
+
+6. 前のTaskの結果を受け取る
+
+次のAI社員は、
+前のTaskで作られた結果を利用します。
+
+市場調査AI
+    ↓
+市場調査レポート
+    ↓
+Workflow
+    ↓
+企画担当AI
+
+AI社員同士が直接会話するのではなく、
+Workflowが成果物を引き渡します。
+
+7. AI社員が次の仕事を開始する
+
+企画担当AIは、
+受け取った市場調査の結果を利用して、
+企画書作成を開始します。
+
+市場調査レポート
+       ↓
+企画担当AI
+       ↓
+企画書作成
+
+前のTaskの結果が、
+次のTaskの入力情報として利用されます。
+
+8. Workflowが連続して仕事を動かす
+
+この仕組みを組み合わせると、
+
+市場調査
+   ↓
+企画書作成
+   ↓
+マーケティング計画
+   ↓
+Webサイト作成
+
+という連続した仕事を作ることができます。
+
+WorkflowがTaskの状態を管理しながら、
+次のTaskへ仕事を進めていきます。
+
+DAY73のポイント
+
+DAY71では、
+
+Taskの進捗を管理
+
+DAY72では、
+
+Taskの結果を管理
+
+DAY73では、
+
+結果を利用して次のTaskを開始
+
+というところまで進みました。
+
+DAY71
+Taskの進捗
+    ↓
+DAY72
+Taskの結果
+    ↓
+DAY73
+次のTaskを開始
+
+Company AI OSでは、
+WorkflowによってAI社員の仕事をつなぎ、
+一つの仕事を連続した業務フローとして実行できる仕組みを作っています。
+
+DAY73｜8つのシーン
+前のTaskが完了する
+WorkflowがTaskの結果を確認する
+次のTaskの条件を確認する
+Workflowが次のTaskを開始する
+担当AI社員へTaskが渡される
+AI社員が前のTaskの結果を受け取る
+AI社員が次の仕事を開始する
+Workflowが連続して仕事を動かす
+
+DAY73｜Workflowが次のTaskを開始する
+
+#CompanyAIOS #AI社員 #AIエージェント #Workflow #生成AI
+
+
+### GitHubでの位置づけ
+
+DAY73では新しい機能を大量に実装するというより、**Workflowの実行フローを一段進めたDAY**として記録するのがよいです。
+
+```text
+DAY70  TaskをAI社員へ割り当てる
+   ↓
+DAY71  Taskの進捗を管理する
+   ↓
+DAY72  Taskの結果を管理する
+   ↓
+DAY73  結果を使って次のTaskを開始する
+
+____________________________________________________________________________________________________________________________________________________________
+
 ### Related
 
 ## 公開記録
@@ -7595,7 +7809,7 @@ ________________________________________________________________________________
 - DAY70　[YouTube](https://youtu.be/Nh3-4XdUzBU)｜[note](https://note.com/grand_peony7915/n/nd4885ca5a712)
 - DAY71　[YouTube](https://youtu.be/tvsvTOYvK9Y)｜[note](https://note.com/grand_peony7915/n/nfdb673f9ed21)
 - DAY72　[YouTube](https://youtu.be/ToX7UDXf2MQ)｜[note](https://note.com/grand_peony7915/n/n83a78f2866d7)
-
+- DAY73　[YouTube](https://youtu.be/visOhHf4gkM)｜[note](https://note.com/grand_peony7915/n/nc8bd2ce66c5e)
 ## Author
 
 Company AI OS Development Log
