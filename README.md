@@ -7771,6 +7771,123 @@ DAY73  結果を使って次のTaskを開始する
 
 ____________________________________________________________________________________________________________________________________________________________
 
+# DAY74｜Workflow Test
+
+## 概要
+
+DAY74では、これまで構築してきたWorkflowを実際の仕事の流れとしてテストしました。
+
+DAY73では、完了したTaskの結果を確認し、その結果を利用して次のTaskを開始し、担当するAI社員へ仕事を引き渡す仕組みを確認しました。
+
+DAY74では、それを一連のWorkflowとして最後まで実行します。
+
+---
+
+## 今回の流れ
+
+```text
+仕事の依頼
+    ↓
+Workflow
+    ↓
+Taskへ分解
+    ↓
+Task 01 実行
+    ↓
+Task 01 完了
+    ↓
+結果を次のTaskへ
+    ↓
+Task 02・03を連続実行
+    ↓
+すべてのTaskが完了
+    ↓
+Workflow Test Complete
+
+DAY74で確認したこと
+1. 仕事をTaskへ分解
+Workflowが一つの仕事を複数のTaskへ分解します。
+例：
+- 市場調査
+- 企画書作成
+- マーケティング計画
+- 資料作成
+大きな仕事を、そのままAI社員へ渡すのではなく、処理可能な単位へ分解します。
+2. Taskを実行
+最初のTaskを担当するAI社員が処理します。
+Taskが完了すると、その結果が保存されます。
+3. Taskの結果を次へ渡す
+Workflowは完了したTaskの結果を確認し、次のTaskへ引き渡します。
+Task 01
+   ↓
+市場調査結果
+   ↓
+Task 02
+   ↓
+企画書
+   ↓
+Task 03
+
+前のTaskの成果物が、次のTaskの入力情報になります。
+4. AI社員をWorkflowで連携
+AI社員同士が直接仕事を渡すのではなく、Workflowが間に入って仕事をつなぎます。
+AI社員 A
+   ↓
+Task結果
+   ↓
+Workflow
+   ↓
+AI社員 B
+   ↓
+Task結果
+   ↓
+Workflow
+   ↓
+AI社員 C
+
+これによって、複数のAI社員を一つの仕事の流れとして連携できます。
+DAY74のポイント
+DAY74で確認したかったのは、
+「Workflowが存在するか」
+ではありません。
+実際に、
+仕事を最初から最後までWorkflowで流せるか
+ということです。
+今回のテストでは、
+- 仕事をTaskへ分解
+- Taskを実行
+- 結果を保存
+- 次のTaskへ結果を引き渡す
+- 担当AI社員へ仕事を渡す
+- 次のTaskを実行
+- すべてのTaskを完了
+という一連の流れを確認しました。
+DAY74の位置付け
+DAY73：
+Workflowが次のTaskを開始する
+
+DAY74：
+Workflowで仕事を最後まで流してみる
+
+という関係です。
+これによりCompany AI OSは、
+AI社員が個別に動くシステム
+から、
+AI社員がWorkflowによって連携して仕事を進めるシステム
+へ一歩進みました。
+使用技術
+- Python
+- Workflow
+- Task管理
+- AI社員
+- Ren'Py
+- Local AI
+DAY74 完了
+Workflow Test Complete.
+仕事をTaskへ分解し、Taskの結果を次のTaskへ引き渡しながら、複数のAI社員を連携させて仕事を最後まで処理する流れを確認しました。
+
+____________________________________________________________________________________________________________________________________________________________
+
 ### Related
 
 ## 公開記録
@@ -7810,6 +7927,8 @@ ________________________________________________________________________________
 - DAY71　[YouTube](https://youtu.be/tvsvTOYvK9Y)｜[note](https://note.com/grand_peony7915/n/nfdb673f9ed21)
 - DAY72　[YouTube](https://youtu.be/ToX7UDXf2MQ)｜[note](https://note.com/grand_peony7915/n/n83a78f2866d7)
 - DAY73　[YouTube](https://youtu.be/visOhHf4gkM)｜[note](https://note.com/grand_peony7915/n/nc8bd2ce66c5e)
+- DAY74　[YouTube](https://youtu.be/urbf_JFG4pQ)｜[note](https://note.com/grand_peony7915/n/nbdf5a3551afc)
+
 ## Author
 
 Company AI OS Development Log
