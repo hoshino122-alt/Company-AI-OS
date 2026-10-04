@@ -7923,7 +7923,7 @@ ________________________________________________________________________________
 - DAY67　[YouTube](https://youtu.be/cuSB11hP32k)｜[note](https://note.com/grand_peony7915/n/n66bd47f0da6f)
 - DAY68　[YouTube](https://youtu.be/PGbq7V2bAb8)｜[note](https://note.com/grand_peony7915/n/n7b240f55047e)
 - DAY69　[YouTube](https://youtu.be/Nh3-4XdUzBU)｜[note](https://note.com/grand_peony7915/n/n0b7e13da7f05)
-- DAY70　[YouTube](https://youtu.be/Nh3-4XdUzBU)｜[note](https://note.com/grand_peony7915/n/nd4885ca5a712)
+- DAY70　[YouTube](https://youtu.be/CQEYZAhPhDc)｜[note](https://note.com/grand_peony7915/n/nd4885ca5a712)
 - DAY71　[YouTube](https://youtu.be/tvsvTOYvK9Y)｜[note](https://note.com/grand_peony7915/n/nfdb673f9ed21)
 - DAY72　[YouTube](https://youtu.be/ToX7UDXf2MQ)｜[note](https://note.com/grand_peony7915/n/n83a78f2866d7)
 - DAY73　[YouTube](https://youtu.be/visOhHf4gkM)｜[note](https://note.com/grand_peony7915/n/nc8bd2ce66c5e)
