@@ -8127,6 +8127,164 @@ DAY77へ続きます。
 
 ____________________________________________________________________________________________________________________________________________________________
 
+# DAY77｜AI Agent × Workflow
+
+## AI社員とWorkflowで仕事を完了する
+
+DAY77では、AI AgentとWorkflowを連携させ、
+一つの仕事を最後まで進めるための基本的な流れを整理しました。
+
+DAY76では、AI Agentが仕事を分析し、
+必要なTaskを判断して実行する仕組みを構築しました。
+
+DAY77では、そのAI AgentをWorkflowと接続します。
+
+---
+
+## 今回のテーマ
+
+AI AgentとWorkflowの連携
+
+今回の基本的な流れは、
+
+仕事
+↓
+Workflow
+↓
+AI Agent
+↓
+Task判断
+↓
+Knowledge / Tool
+↓
+Task実行
+↓
+結果
+↓
+Workflow
+↓
+次のTask
+↓
+AI Agent
+↓
+仕事完了
+
+という構成です。
+
+---
+
+## AI AgentとWorkflowの役割
+
+### Workflow
+
+Workflowは、仕事全体の流れを管理します。
+
+- 仕事を受け取る
+- Taskを管理する
+- Taskの順番を管理する
+- AI AgentへTaskを渡す
+- 実行結果を受け取る
+- 次のTaskへ進める
+
+### AI Agent
+
+AI Agentは、Workflowから受け取ったTaskを実行します。
+
+- Taskの内容を分析
+- 必要なKnowledgeを検索
+- 必要なToolを選択
+- Taskを実行
+- 実行結果をWorkflowへ返す
+
+---
+
+## DAY77の処理フロー
+
+### 01｜新しい仕事を受け取る
+
+Company AI OSに新しい仕事の依頼が届きます。
+
+### 02｜Workflowが仕事を開始する
+
+Workflowが仕事を受け取り、
+必要な処理の流れを開始します。
+
+### 03｜AI AgentがTaskを判断する
+
+AI Agentが仕事の内容を分析し、
+必要なTaskを判断します。
+
+### 04｜KnowledgeとToolを使ってTaskを実行する
+
+AI AgentがKnowledgeから情報を取得し、
+必要に応じてToolを実行します。
+
+### 05｜実行結果をWorkflowへ返す
+
+Taskの実行結果をWorkflowへ返します。
+
+### 06｜Workflowが結果を確認する
+
+Workflowが結果を確認し、
+次のTaskへ進める状態か判断します。
+
+### 07｜次のTaskをAI Agentへ渡す
+
+Workflowが次のTaskをAI Agentへ渡します。
+
+### 08｜AgentとWorkflowで仕事を完了する
+
+AI AgentとWorkflowが連携し、
+一つの仕事を最後まで進めます。
+
+---
+
+## DAY77で確認したこと
+
+DAY76では、
+
+「AI社員が仕事を判断して実行する」
+
+という仕組みを作りました。
+
+DAY77では、
+
+「AI社員とWorkflowが連携して仕事を進める」
+
+構造へ進みました。
+
+AI Agentだけではなく、
+WorkflowによってTaskとTaskをつなぐことで、
+AIが仕事全体を継続して処理できる構造になります。
+
+---
+
+## Project
+
+Company AI OS
+
+100日でCompany AI OSを作るプロジェクトです。
+
+DAY77では、
+AI AgentとWorkflowを連携させ、
+AI社員が一つの仕事を最後まで進めるための
+基本構造を整理しました。
+
+---
+
+## DAY77
+
+**AI Agent × Workflow**
+
+AI社員がTaskを実行し、
+Workflowが仕事の流れをつなぐ。
+
+Company AI OSが
+「AIが仕事をする会社」の構造へ
+一歩進みました。
+
+____________________________________________________________________________________________________________________________________________________________
+
 ### Related
 
 ## 公開記録
@@ -8169,7 +8327,7 @@ ________________________________________________________________________________
 - DAY74　[YouTube](https://youtu.be/urbf_JFG4pQ)｜[note](https://note.com/grand_peony7915/n/nbdf5a3551afc)
 - DAY75　[YouTube](https://youtu.be/0xTGYAv_xZo)｜[note](https://note.com/grand_peony7915/n/n3e462d5270b2)
 - DAY76　[YouTube](https://youtu.be/DyDlVHh5oJY)｜[note](https://note.com/grand_peony7915/n/n5b2ae42560f2)
-
+- DAY77　[YouTube](https://youtu.be/96eJkg9af60)｜[note](https://note.com/grand_peony7915/n/nfc372d4a60a3)
 
 ## Author
 
