@@ -8285,6 +8285,177 @@ Company AI OSが
 
 ____________________________________________________________________________________________________________________________________________________________
 
+# DAY78｜AI Workflow
+
+## 複数のTaskを連続して実行する
+
+DAY78では、DAY77で構築した
+AI AgentとWorkflowの連携をさらに発展させ、
+
+**複数のTaskをWorkflowによって連続して実行する仕組み**
+
+を整理しました。
+
+---
+
+## 今回のテーマ
+
+今回の仕事は、
+
+「新商品の市場調査レポートを作成する」
+
+という一つの仕事です。
+
+この仕事を複数のTaskへ分解します。
+
+```text
+01｜市場調査
+      ↓
+02｜競合分析
+      ↓
+03｜ターゲット分析
+      ↓
+04｜レポート作成
+
+WorkflowがTaskの順番を管理し、
+AI AgentがそれぞれのTaskを実行します。
+Workflowの役割
+Workflowは仕事全体の流れを管理します。
+- 仕事をTaskへ分解する
+- Taskの順番を管理する
+- AI AgentへTaskを渡す
+- 実行結果を受け取る
+- 結果を次のTaskへ引き渡す
+- 最後のTaskまで処理を進める
+Workflowによって、
+複数のTaskを一つの仕事としてつなげます。
+AI Agentの役割
+AI AgentはWorkflowからTaskを受け取り、
+実際の処理を実行します。
+Workflow
+   ↓
+Task
+   ↓
+AI Agent
+   ↓
+Knowledge / Tool
+   ↓
+Task実行
+   ↓
+結果
+
+実行結果はWorkflowへ返され、
+次のTaskへ引き渡されます。
+DAY78の処理フロー
+01｜複数のTaskを持つ仕事
+一つの仕事を複数のTaskへ分解します。
+02｜Workflowを設計する
+Task同士をどのようにつなぐかを設計します。
+03｜Taskの順番を決める
+仕事を完了するために必要なTaskの順番を設定します。
+04｜Task 01をAI Agentへ渡す
+Workflowが最初のTaskをAI Agentへ渡します。
+05｜結果を次のTaskへ引き渡す
+Task 01の結果をWorkflowが受け取り、
+次のTaskへ引き渡します。
+06｜Task 02を実行する
+AI Agentが次のTaskを受け取り、
+KnowledgeやToolを使って実行します。
+07｜複数Taskを連続して実行する
+Workflowによって複数のTaskを順番に実行します。
+08｜Workflowで仕事全体を完了する
+すべてのTaskが完了し、
+一つの仕事全体が完了します。
+DAY78の基本構造
+仕事
+ ↓
+Workflow
+ ↓
+Task 01
+ ↓
+AI Agent
+ ↓
+結果
+ ↓
+Workflow
+ ↓
+Task 02
+ ↓
+AI Agent
+ ↓
+結果
+ ↓
+Workflow
+ ↓
+Task 03
+ ↓
+AI Agent
+ ↓
+結果
+ ↓
+Workflow
+ ↓
+Task 04
+ ↓
+AI Agent
+ ↓
+仕事完了
+
+DAY76 → DAY77 → DAY78
+DAY76
+AI Agentが仕事を分析し、
+必要なTaskを判断して実行する。
+DAY77
+AI AgentとWorkflowを連携する。
+DAY78
+Workflowによって複数のTaskをつなぎ、
+仕事全体を連続して実行する。
+DAY76
+AI Agent
+    ↓
+Taskを判断・実行
+
+DAY77
+AI Agent × Workflow
+    ↓
+Taskと仕事の流れを連携
+
+DAY78
+Workflow
+    ↓
+複数Task
+    ↓
+連続実行
+    ↓
+仕事完了
+
+DAY78で確認したこと
+AI Agentが一つのTaskを実行するだけではなく、
+Workflowによって複数のTaskをつなぐことで、
+一つの仕事全体を連続して処理できる
+構造を確認しました。
+Company AI OSは、
+「AIが回答する」だけではなく、
+「AIがTaskを実行し、仕事を前へ進める」
+段階へ進んでいます。
+Project
+Company AI OS
+100日でCompany AI OSを完成させるプロジェクト。
+DAY78では、
+AI AgentとWorkflowを使って
+複数のTaskを連続して実行する
+基本的なWorkflow構造を整理しました。
+DAY78
+AI Workflow
+複数のTaskをつなげて、
+AI Agentが仕事全体を進める。
+Workflowによって、
+Company AI OSの「AIが仕事をする」仕組みを
+さらに一段進めました。
+
+____________________________________________________________________________________________________________________________________________________________
+
+
 ### Related
 
 ## 公開記録
