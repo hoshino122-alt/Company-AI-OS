@@ -8455,6 +8455,107 @@ Company AI OSの「AIが仕事をする」仕組みを
 
 ____________________________________________________________________________________________________________________________________________________________
 
+DAY79｜Workflow State Management
+
+Overview
+
+DAY79 focuses on Workflow state management in Company AI OS.
+
+After introducing multi-task workflow execution in DAY78, this stage focuses on tracking task progress, receiving execution results, detecting failures, retrying failed tasks, and understanding the overall state of a job.
+
+The goal is to make workflow execution easier to monitor and manage.
+
+Key Topics
+
+Checking overall workflow progress
+
+Managing individual task states
+
+Receiving task execution results
+
+Detecting task failures
+
+Retrying failed tasks
+
+Moving to the next task after completion
+
+Understanding the overall job status
+
+Organizing workflow state management
+
+Task Statuses
+
+The workflow concept covers the following statuses:
+
+Status
+
+Description
+
+Completed
+
+The task finished successfully
+
+Running
+
+The task is currently executing
+
+Pending
+
+The task is waiting to execute
+
+Error
+
+The task failed
+
+Cancelled
+
+The task was stopped
+
+Workflow Example
+
+A sample workflow for preparing a market research report:
+
+Market Research
+
+Competitor Analysis
+
+Target Analysis
+
+Report Creation
+
+Each task produces a result that can be passed to the next task. The workflow tracks progress and records execution outcomes to make the overall process easier to understand.
+
+Error Handling Concept
+
+When a task fails, the workflow should be able to:
+
+Detect the failure
+
+Record the error state and execution log
+
+Retry the task according to configured conditions
+
+Pass the result to the next task when successful
+
+Retry limits and error-handling behavior should be defined by the actual implementation.
+
+Development Goal
+
+Company AI OS aims to combine AI employees, Knowledge Base, Tools, AI Agent, and Workflow into a system that supports and executes company work.
+
+DAY79 organizes the concepts needed to monitor task execution and understand the state of the overall workflow.
+
+Project Progress
+
+DAY78: Multi-task workflow execution
+
+DAY79: Workflow state management
+
+Note: This README documents the DAY79 design and development topic. Individual capabilities should be considered implemented only after they have been verified in the actual code.
+
+#CompanyAIOS #Workflow #AIAgent #Python
+
+____________________________________________________________________________________________________________________________________________________________
 
 ### Related
 
@@ -8499,6 +8600,8 @@ ________________________________________________________________________________
 - DAY75　[YouTube](https://youtu.be/0xTGYAv_xZo)｜[note](https://note.com/grand_peony7915/n/n3e462d5270b2)
 - DAY76　[YouTube](https://youtu.be/DyDlVHh5oJY)｜[note](https://note.com/grand_peony7915/n/n5b2ae42560f2)
 - DAY77　[YouTube](https://youtu.be/96eJkg9af60)｜[note](https://note.com/grand_peony7915/n/nfc372d4a60a3)
+- DAY78　[YouTube](https://youtu.be/PIIJzkNIQqM)｜[note](https://note.com/grand_peony7915/n/n02fe6570d4ad)
+- DAY79　[YouTube](https://youtu.be/iyU4LBsziZA)｜[note](https://note.com/grand_peony7915/n/nccb000ab5e58)
 
 ## Author
 
