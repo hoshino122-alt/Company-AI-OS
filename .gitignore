@@ -1,0 +1,49 @@
+# Secrets and credentials
+credentials.json
+token.json
+.env
+.env.*
+!.env.example
+
+# Python generated files
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local editor settings
+.vscode/
+.idea/
+
+# Backups
+backup*/
+backups/
+*_backup*
+*バックアップ*
+*.bak
+*.bak.*
+
+# Personal and runtime Memory data
+/memory.json
+/memory_before_*.json
+/memory_facts_before_*.json
+/memory/facts.json
+/memory/development_history.json
+/memory/*backup*.json
+/memory/*backup*.py
+
+# Runtime databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs and temporary files
+*.log
+/logs/
+/process().txt
+/tatus --short
+
+# Local work records
+/作業ログ/
