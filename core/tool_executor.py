@@ -1,3 +1,5 @@
+import os
+
 from core.tool_manager import run_tool
 from datetime import datetime
 from tools.gmail_tool import (
@@ -6,7 +8,10 @@ from tools.gmail_tool import (
     search_and_get_gmail_messages
 )
 
+
 def save_tool_log(tool, arguments, result):
+
+    os.makedirs("logs", exist_ok=True)
 
     timestamp = datetime.now().strftime(
         "%Y-%m-%d %H:%M:%S"

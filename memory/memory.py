@@ -151,7 +151,8 @@ def search_memory(messages, keyword, limit=10):
         "直前",
         "直近",
         "今の",
-        "今さっき"
+        "今さっき",
+        "以前"
     ]
 
     is_recent_question = any(
@@ -170,6 +171,7 @@ def search_memory(messages, keyword, limit=10):
             "名前",
             "好きな色",
             "好きな食べ物",
+            "好きな動物",
             "会社名",
             "計算結果",
             "ランダムな数字",
