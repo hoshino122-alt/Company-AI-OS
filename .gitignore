@@ -18,7 +18,6 @@ __pycache__/
 .idea/
 
 # Backups
-backup*/
 backups/
 *_backup*
 *バックアップ*

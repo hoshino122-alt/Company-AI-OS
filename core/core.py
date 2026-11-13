@@ -272,6 +272,7 @@ def process(question):
     # =========================
 
     relevant_knowledge = []
+    knowledge_base = None
 
     if "knowledge_base" in selected_memories:
 
@@ -282,8 +283,6 @@ def process(question):
                 intent_question,
                 limit=5
             )
-
-            knowledge_base.close()
 
             print(
                 "Knowledge Base検索結果：",
@@ -304,6 +303,10 @@ def process(question):
 
         except Exception as e:
             print("Knowledge Base検索エラー：", e)
+
+        finally:
+            if knowledge_base is not None:
+                knowledge_base.close()
 
     print(
         "Memory選択結果：",
